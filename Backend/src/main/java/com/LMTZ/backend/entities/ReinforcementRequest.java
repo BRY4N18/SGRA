@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+package com.LMTZ.backend.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
