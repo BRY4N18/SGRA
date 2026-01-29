@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Sgra01Application<SGRA01>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.LMTZ.backend.Sgra01Application",
+            "projectName": "SGRA01",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
