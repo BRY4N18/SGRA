@@ -26,4 +26,7 @@ public class SubjectsCareers {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idcarrera", foreignKey = @ForeignKey(name = "fk_asignatiracarrera_carrera"))
     private Career careerId;
+
+    @Column(name = "estado", nullable = false, columnDefinition = "boolean default true")
+    private Boolean state = true;
 }
