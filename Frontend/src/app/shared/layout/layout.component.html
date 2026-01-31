@@ -1,0 +1,42 @@
+<div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="brand">
+      <div class="logo">SGRA</div>
+      <div class="subtitle">Refuerzo Académico</div>
+    </div>
+
+    <nav class="menu">
+      <a class="menu-item" routerLink="/dashboard/coordinador" routerLinkActive="active">
+        <i class="bi bi-grid-1x2"></i><span>Dashboard</span>
+      </a>
+      <a class="menu-item" routerLink="/dashboard/admin" routerLinkActive="active">
+        <i class="bi bi-people"></i><span>Usuarios</span>
+      </a>
+      <a class="menu-item" routerLink="/dashboard/coordinador" routerLinkActive="active">
+        <i class="bi bi-bell"></i><span>Notificaciones</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <small class="text-muted">UTEQ • SGRA</small>
+    </div>
+  </aside>
+
+  <main class="app-main">
+    <header class="app-topbar">
+      <div class="topbar-left">
+        <h5 class="m-0">Panel</h5>
+        <span class="pill">Activo</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-outline-success btn-sm">
+          <i class="bi bi-person-circle me-1"></i> Mi cuenta
+        </button>
+      </div>
+    </header>
+
+    <section class="app-content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>
