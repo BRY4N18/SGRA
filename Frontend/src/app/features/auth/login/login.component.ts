@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/auth/auth.service';
-
-type Role = 'Admin' | 'Coordinador' | 'Docente' | 'Estudiante';
+import { AuthService, Role } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,30 +23,31 @@ export class LoginComponent {
     this.message = '';
     this.error = '';
 
-    if (this.user.trim() || this.pass.trim()) {
+    if (!this.user.trim() || !this.pass.trim()) {
       this.error = 'Por favor, completa todos los campos';
       return;
     }
 
     this.auth.login(this.user.trim(), this.pass).subscribe({
       next: (res) => {
-        if (res && res.success) {
-          const map: Record<Role, string> = {
-            Admin: '/dashboard/admin',
-            Coordinador: '/dashboard/coordinador',
-            Docente: '/dashboard/docente',
-            Estudiante: '/dashboard/estudiante',
-          };
+        const map: Record<Role, string> = {
+          ADMIN: '/dashboard/admin',
+          COORDINATOR: '/dashboard/coordinador',
+          TEACHER: '/dashboard/docente',
+          STUDENT: '/dashboard/estudiante',
+        };
 
-          this.router.navigateByUrl(map[res.role as Role]);
-        } else {
-          this.error = 'Usuario o contraseña incorrectos';
-        }
+        this.router.navigateByUrl(map[res.role] ?? '/dashboard/estudiante');
       },
       error: (err) => {
-        this.error = 'No se pudo conectar con el servidor. Inténtalo más tarde.';
-        console.error('Login error:', err);
-      }
+        if (err?.status === 401) {
+          this.error = 'Usuario o contraseña incorrectos';
+        } else if (err?.status === 403) {
+          this.error = err?.error?.message ?? 'Cuenta inactiva. Contacta al administrador.';
+        } else {
+          this.error = 'No se pudo conectar con el servidor. Inténtalo más tarde.';
+        }
+      },
     });
   }
 }
