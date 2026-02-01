@@ -1,12 +1,49 @@
-<section class="hero-card">
+<section class="page-header">
   <div>
-    <h2>Gestión de Disponibilidad</h2>
-    <p>Selecciona las franjas horarias disponibles para refuerzos académicos.</p>
+    <h2><span class="header-icon">🕘</span> Gestión de Disponibilidad</h2>
+    <p>Define tus horarios disponibles para sesiones de refuerzo académico.</p>
   </div>
-  <div class="legend">
-    <span class="legend-item"><span class="legend-dot available"></span> Disponible</span>
-    <span class="legend-item"><span class="legend-dot busy"></span> No disponible</span>
-    <span class="legend-item"><span class="legend-dot session"></span> Sesión programada</span>
+  <div class="header-actions">
+    <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearAll()">Limpiar todo</button>
+    <button class="btn btn-success btn-sm" type="button" (click)="saveChanges()">Guardar cambios</button>
+  </div>
+</section>
+
+<section class="info-card">
+  <div class="info-icon">ℹ️</div>
+  <div>
+    <strong>Instrucciones:</strong> Haz clic en las celdas para marcar o desmarcar tu disponibilidad.
+    Los horarios marcados en verde estarán disponibles para que los estudiantes soliciten sesiones de refuerzo.
+    <div class="info-note">Los horarios ya reservados para sesiones aparecen en color morado y no pueden modificarse.</div>
+  </div>
+</section>
+
+<section class="legend-card">
+  <span class="legend-item"><span class="legend-chip available"></span> Disponible</span>
+  <span class="legend-item"><span class="legend-chip busy"></span> No disponible</span>
+  <span class="legend-item"><span class="legend-chip session"></span> Sesión programada</span>
+</section>
+
+<section class="controls-card">
+  <div class="control-group">
+    <span class="control-label">Selección rápida por día:</span>
+    <div class="day-buttons">
+      <button
+        class="day-button"
+        type="button"
+        *ngFor="let day of quickDays"
+        [class.active]="selectedDay === day"
+        (click)="selectDay(day)"
+      >
+        {{ day }}
+      </button>
+    </div>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Selección por bloque horario:</span>
+    <select class="block-select" [value]="selectedBlock" (change)="selectBlock($event)">
+      <option *ngFor="let option of blockOptions" [value]="option">{{ option }}</option>
+    </select>
   </div>
 </section>
 
@@ -14,43 +51,65 @@
   <div class="availability-grid">
     <div class="grid-header">
       <div class="time-cell"></div>
-      <div class="day-cell" *ngFor="let day of days">{{ day }}</div>
+      <div class="day-cell" *ngFor="let day of days">
+        <span class="day-name">{{ day }}</span>
+        <small>{{ getDaySlots(day) }} slots</small>
+      </div>
     </div>
     <div class="grid-row" *ngFor="let time of times">
-      <div class="time-cell">{{ time }}</div>
+      <div class="time-cell">
+        <strong>{{ time }}</strong>
+        <small>{{ getEndTime(time) }}</small>
+      </div>
       <button
         class="slot"
         type="button"
         *ngFor="let day of days"
         [ngClass]="getStatusClass(day, time)"
         (click)="toggleSlot(getSlot(day, time))"
-      ></button>
+      >
+        <span class="slot-icon" *ngIf="getSlotStatus(day, time) === 'DISPONIBLE'">✓</span>
+        <span class="slot-icon" *ngIf="getSlotStatus(day, time) === 'SESION'">✕</span>
+      </button>
     </div>
   </div>
-
-  <div class="availability-actions">
-    <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearAll()">Limpiar Todo</button>
-    <button class="btn btn-success btn-sm" type="button" (click)="saveChanges()">Guardar Cambios</button>
-  </div>
-
-  <div *ngIf="feedback" class="alert alert-info mt-3">{{ feedback }}</div>
 </section>
 
+<div *ngIf="feedback" class="toast" [class.toast-success]="feedbackType === 'success'">
+  {{ feedback }}
+</div>
+
 <section class="summary-card">
-  <div>
-    <h4>Resumen semanal</h4>
-    <p>Disponibles: <strong>{{ stats.disponibles }}</strong></p>
-    <p>Sesiones programadas: <strong>{{ stats.programadas }}</strong></p>
-    <p>Horas semanales: <strong>{{ stats.horasSemanales }}</strong></p>
-    <p>Días con disponibilidad: <strong>{{ stats.diasActivos }}</strong></p>
+  <div class="summary-header">
+    <span class="summary-icon">📋</span>
+    <h4>Resumen de Disponibilidad</h4>
+  </div>
+  <div class="summary-metrics">
+    <div class="summary-item">
+      <span class="summary-value">{{ stats.disponibles }}</span>
+      <span class="summary-label">Slots disponibles</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-value">{{ stats.programadas }}</span>
+      <span class="summary-label">Sesiones programadas</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-value">{{ stats.horasSemanales }}</span>
+      <span class="summary-label">Horas semanales</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-value">{{ stats.diasActivos }}</span>
+      <span class="summary-label">Días con disponibilidad</span>
+    </div>
   </div>
   <div class="distribution">
+    <h5>Distribución semanal</h5>
     <div class="bar" *ngFor="let item of stats.distribucion">
       <span>{{ item.day }}</span>
       <div class="bar-track">
-        <div class="bar-fill" [style.width.%]="item.hours * 10"></div>
+        <div class="bar-fill" [style.width.%]="item.hours * 14"></div>
       </div>
-      <small>{{ item.hours }} h</small>
+      <strong>{{ item.hours }}</strong>
     </div>
   </div>
 </section>

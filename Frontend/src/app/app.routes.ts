@@ -63,7 +63,7 @@ export const routes: Routes = [
   {
     path: 'dashboard/docente',
     canActivate: [authGuard, roleGuard],
-    data: { roles: ['TEACHER'] },
+    data: { roles: ['TEACHER', 'DOCENTE'] },
     loadComponent: () =>
       import('./features/teacher/layout/teacher-layout.component').then(
         m => m.TeacherLayoutComponent
