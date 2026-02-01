@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.LMTZ.backend.entities.Access;
 
 @Repository
-public interface IAccessRepository extends JpaRepository<Access,Integer> {
-    Optional<Access> findByUserId(Integer userId);
+public interface IAccessRepository extends JpaRepository<Access, Integer> {
+    Optional<Access> findByUser_UserId(Integer userId);
     Optional<Access> findByUsername(String username);
 }
