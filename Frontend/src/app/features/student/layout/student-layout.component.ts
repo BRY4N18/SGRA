@@ -15,6 +15,9 @@ export class StudentLayoutComponent {
   private titleSignal = signal('Dashboard Estudiante');
   username = localStorage.getItem('sgra_username') || 'Estudiante';
   isSidebarCollapsed = window.innerWidth < 992;
+  isRoleMenuOpen = false;
+  availableRoles = this.getAvailableRoles();
+  activeRole = this.getActiveRole();
 
   title = computed(() => this.titleSignal());
 
@@ -32,6 +35,69 @@ export class StudentLayoutComponent {
 
   toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+
+  toggleRoleMenu() {
+    this.isRoleMenuOpen = !this.isRoleMenuOpen;
+  }
+
+  selectRole(role: string) {
+    localStorage.setItem('sgra_active_role', role);
+    this.activeRole = role;
+    this.isRoleMenuOpen = false;
+
+    const redirectMap: Record<string, string> = {
+      STUDENT: '/dashboard/estudiante',
+      TEACHER: '/dashboard/docente',
+      ADMIN: '/dashboard/en-construccion',
+      COORDINATOR: '/dashboard/en-construccion',
+    };
+
+    this.router.navigateByUrl(redirectMap[role] ?? '/dashboard/en-construccion');
+  }
+
+  formatRole(role: string): string {
+    const map: Record<string, string> = {
+      STUDENT: 'Estudiante',
+      TEACHER: 'Docente',
+      ADMIN: 'Administrador',
+      COORDINATOR: 'Coordinador',
+    };
+    return map[role] ?? role;
+  }
+
+  private getActiveRole(): string {
+    return (
+      localStorage.getItem('sgra_active_role') ||
+      localStorage.getItem('sgra_role') ||
+      'STUDENT'
+    );
+  }
+
+  private getAvailableRoles(): string[] {
+    const raw = localStorage.getItem('sgra_role');
+    if (!raw) return ['STUDENT'];
+
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('[')) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) {
+          return parsed.map(role => String(role).trim()).filter(Boolean);
+        }
+      } catch {
+        return [trimmed];
+      }
+    }
+
+    if (trimmed.includes(',')) {
+      return trimmed
+        .split(',')
+        .map(role => role.trim())
+        .filter(Boolean);
+    }
+
+    return [trimmed];
   }
 
   private getDeepestChild(route: ActivatedRoute): ActivatedRoute {
