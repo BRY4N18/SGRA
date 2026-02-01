@@ -1,39 +1,50 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Layout } from './shared/layout/layout';
+import { LoginComponent } from './features/auth/login/login.component';
+import { LayoutComponent } from './shared/layout/layout.component';
+import { authGuard } from './core/guards/authGuard';
+import { roleGuard } from './core/guards/roleGuard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  { path: 'login', component: Login },
+  { path: 'login', component: LoginComponent },
 
   {
     path: 'dashboard',
-    component: Layout,
+    component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'admin',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN'] },
         loadComponent: () =>
-          import('./pages/dashboards/admin-dashboard/admin-dashboard')
-            .then(m => m.AdminDashboard),
+          import('./features/dashboards/adminDashboard/adminDashboard.component')
+            .then(m => m.AdminDashboardComponent),
       },
       {
         path: 'coordinador',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
         loadComponent: () =>
-          import('./pages/dashboards/coordinador-dashboard/coordinador-dashboard')
-            .then(m => m.CoordinadorDashboard),
+          import('./features/dashboards/coordinatorDashboard/coordinatorDashboard.component')
+            .then(m => m.CoordinatorDashboardComponent),
       },
       {
         path: 'docente',
+        canActivate: [roleGuard],
+        data: { roles: ['TEACHER'] },
         loadComponent: () =>
-          import('./pages/dashboards/docente-dashboard/docente-dashboard')
-            .then(m => m.DocenteDashboard),
+          import('./features/dashboards/teacherDashboard/teacherDashboard.component')
+            .then(m => m.TeacherDashboardComponent),
       },
       {
         path: 'estudiante',
+        canActivate: [roleGuard],
+        data: { roles: ['STUDENT'] },
         loadComponent: () =>
-          import('./pages/dashboards/estudiante-dashboard/estudiante-dashboard')
-            .then(m => m.EstudianteDashboard),
+          import('./features/dashboards/studentDashboard/studentDashboard.component')
+            .then(m => m.StudentDashboardComponent),
       },
 
       // si entras a /dashboard, manda a coordinador (o al que quieras)
