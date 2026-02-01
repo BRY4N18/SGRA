@@ -1,0 +1,27 @@
+.construction-card {
+  background: #fff;
+  padding: 32px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.construction-card h2 {
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.construction-card p {
+  margin-bottom: 16px;
+  color: #6b7c73;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #f4f7f5;
+  color: #0f8a4c;
+  font-weight: 600;
+}

@@ -1,0 +1,163 @@
+.wizard-header {
+  margin-bottom: 16px;
+}
+
+.wizard-header h2 {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.wizard-header p {
+  margin: 0;
+  color: #607169;
+  font-size: 13px;
+}
+
+.wizard-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.step {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #eef5f0;
+  color: #4f6658;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.step.active {
+  background: #0f8a4c;
+  color: #fff;
+}
+
+.wizard-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+}
+
+.step-content h4 {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.chip-group {
+  display: flex;
+  gap: 10px;
+}
+
+.chip {
+  border: 1px solid #d1e5d9;
+  background: #f4faf6;
+  color: #2d4a3a;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.chip.active {
+  background: #0f8a4c;
+  color: #fff;
+}
+
+.groupmates {
+  margin-top: 20px;
+}
+
+.groupmates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.groupmates-header h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.groupmates-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.groupmates-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.groupmates-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.groupmate-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f4f7f5;
+  border-radius: 10px;
+  border: 1px solid #e1ece6;
+  font-size: 13px;
+}
+
+.groupmate-card input {
+  accent-color: #0f8a4c;
+}
+
+.groupmate-card small {
+  display: block;
+  color: #6f7f76;
+}
+
+.summary-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  background: #f7faf8;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e1ece6;
+  font-size: 13px;
+}
+
+.summary-card span {
+  font-size: 12px;
+  color: #6f7f76;
+  display: block;
+}
+
+.wizard-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
