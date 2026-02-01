@@ -1,0 +1,31 @@
+<section class="preferences-card">
+  <h2>Preferencias</h2>
+  <p>Configura cómo deseas recibir notificaciones y recordatorios.</p>
+
+  <div class="form-grid">
+    <div>
+      <label class="form-label">Canal de notificación</label>
+      <select class="form-select" [(ngModel)]="channel">
+        <option>Correo</option>
+        <option>SMS</option>
+        <option>WhatsApp</option>
+        <option>Notificación in-app</option>
+      </select>
+    </div>
+    <div>
+      <label class="form-label">Frecuencia</label>
+      <select class="form-select" [(ngModel)]="frequency">
+        <option>Diaria</option>
+        <option>Semanal</option>
+        <option>Solo importantes</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h6>Resumen</h6>
+    <p>Canal seleccionado: <strong>{{ channel }}</strong></p>
+    <p>Frecuencia: <strong>{{ frequency }}</strong></p>
+    <button class="btn btn-success" type="button">Guardar preferencias</button>
+  </div>
+</section>

@@ -10,6 +10,58 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   {
+    path: 'dashboard/estudiante',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['STUDENT'] },
+    loadComponent: () =>
+      import('./features/student/layout/student-layout.component').then(
+        m => m.StudentLayoutComponent
+      ),
+    children: [
+      {
+        path: '',
+        data: { title: 'Dashboard Estudiante' },
+        loadComponent: () =>
+          import('./features/student/pages/dashboard/student-dashboard.component').then(
+            m => m.StudentDashboardPageComponent
+          ),
+      },
+      {
+        path: 'mis-solicitudes',
+        data: { title: 'Mis Solicitudes' },
+        loadComponent: () =>
+          import('./features/student/pages/mis-solicitudes/mis-solicitudes.component').then(
+            m => m.MisSolicitudesComponent
+          ),
+      },
+      {
+        path: 'nueva-solicitud',
+        data: { title: 'Nueva Solicitud de Refuerzo' },
+        loadComponent: () =>
+          import('./features/student/pages/nueva-solicitud/nueva-solicitud.component').then(
+            m => m.NuevaSolicitudComponent
+          ),
+      },
+      {
+        path: 'historial',
+        data: { title: 'Historial' },
+        loadComponent: () =>
+          import('./features/student/pages/historial/historial.component').then(
+            m => m.HistorialComponent
+          ),
+      },
+      {
+        path: 'preferencias',
+        data: { title: 'Preferencias' },
+        loadComponent: () =>
+          import('./features/student/pages/preferencias/preferencias.component').then(
+            m => m.PreferenciasComponent
+          ),
+      },
+    ],
+  },
+
+  {
     path: 'dashboard',
     component: LayoutComponent,
     canActivate: [authGuard],
@@ -39,12 +91,11 @@ export const routes: Routes = [
             .then(m => m.TeacherDashboardComponent),
       },
       {
-        path: 'estudiante',
-        canActivate: [roleGuard],
-        data: { roles: ['STUDENT'] },
+        path: 'en-construccion',
         loadComponent: () =>
-          import('./features/dashboards/studentDashboard/studentDashboard.component')
-            .then(m => m.StudentDashboardComponent),
+          import('./features/placeholders/en-construccion/en-construccion.component').then(
+            m => m.EnConstruccionComponent
+          ),
       },
 
       // si entras a /dashboard, manda a coordinador (o al que quieras)

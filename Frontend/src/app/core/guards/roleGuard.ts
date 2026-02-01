@@ -12,5 +12,14 @@ export const roleGuard: CanActivateFn = (route) => {
   if (!auth.isAuthenticated() || !role) return router.createUrlTree(['/login']);
   if (allowed.length === 0) return true;
 
-  return allowed.includes(role) ? true : router.createUrlTree(['/login']);
+  if (allowed.includes(role)) return true;
+
+  const redirectMap: Record<string, string> = {
+    TEACHER: '/dashboard/docente',
+    STUDENT: '/dashboard/estudiante',
+    ADMIN: '/dashboard/en-construccion',
+    COORDINATOR: '/dashboard/en-construccion',
+  };
+
+  return router.createUrlTree([redirectMap[role] ?? '/login']);
 };

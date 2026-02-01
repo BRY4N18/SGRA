@@ -1,0 +1,62 @@
+<div class="student-shell">
+  <aside class="student-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">
+        <span class="brand-icon">🎓</span>
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">SGRA</span>
+        <span class="brand-subtitle">UTEQ</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard/estudiante" routerLinkActive="active" class="nav-item" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="bi bi-grid"></i>
+        Dashboard
+      </a>
+      <a routerLink="/dashboard/estudiante/nueva-solicitud" routerLinkActive="active" class="nav-item">
+        <i class="bi bi-file-earmark-plus"></i>
+        Nueva Solicitud
+      </a>
+      <a routerLink="/dashboard/estudiante/mis-solicitudes" routerLinkActive="active" class="nav-item">
+        <i class="bi bi-journal-text"></i>
+        Mis Solicitudes
+      </a>
+      <a routerLink="/dashboard/estudiante/historial" routerLinkActive="active" class="nav-item">
+        <i class="bi bi-clock-history"></i>
+        Historial
+      </a>
+      <a routerLink="/dashboard/estudiante/preferencias" routerLinkActive="active" class="nav-item">
+        <i class="bi bi-gear"></i>
+        Preferencias
+      </a>
+    </nav>
+
+    <button class="sidebar-logout" type="button" (click)="onLogout()">
+      <i class="bi bi-box-arrow-right"></i>
+      Cerrar sesión
+    </button>
+  </aside>
+
+  <section class="student-main">
+    <header class="student-topbar">
+      <div class="topbar-title">
+        <h4>{{ title() }}</h4>
+        <span class="subtitle">Bienvenido, {{ username }}</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-button" type="button">
+          <i class="bi bi-bell"></i>
+        </button>
+        <button class="icon-button" type="button">
+          <i class="bi bi-person-circle"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="student-content">
+      <router-outlet></router-outlet>
+    </main>
+  </section>
+</div>
