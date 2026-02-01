@@ -30,7 +30,7 @@ public class UserServiceImpl implements IUserService {
         Optional<User> user = userRepo.findByEmail(email);
 
         if(user.isPresent()){
-            accessCredentials = accessRepo.findByUser_UserId(user.get().getUserId()).orElse(null);
+            accessCredentials = accessRepo.findByUserId(user.get().getUserId()).orElse(null);
         }
 
         if(accessCredentials != null && accessCredentials.getPassword().equals(password)){
