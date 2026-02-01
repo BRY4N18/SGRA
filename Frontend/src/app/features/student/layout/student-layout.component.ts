@@ -14,7 +14,7 @@ import { filter } from 'rxjs/operators';
 export class StudentLayoutComponent {
   private titleSignal = signal('Dashboard Estudiante');
   username = localStorage.getItem('sgra_username') || 'Estudiante';
-  isSidebarCollapsed = false;
+  isSidebarCollapsed = window.innerWidth < 992;
 
   title = computed(() => this.titleSignal());
 

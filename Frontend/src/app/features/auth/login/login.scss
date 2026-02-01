@@ -63,6 +63,16 @@
   margin: 20px 0 8px;
 }
 
+.login-card .form-control {
+  border-color: #d5dde6;
+  box-shadow: none;
+}
+
+.login-card .form-control:focus {
+  border-color: #0b6b3a;
+  box-shadow: 0 0 0 0.15rem rgba(11, 107, 58, 0.15);
+}
+
 .helper {
   text-align: center;
 }
