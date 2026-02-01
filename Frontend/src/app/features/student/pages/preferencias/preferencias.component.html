@@ -1,6 +1,6 @@
 <section class="preferences-card">
-  <h2>Preferencias</h2>
-  <p>Configura cómo deseas recibir notificaciones y recordatorios.</p>
+  <h3>Configura tus notificaciones</h3>
+  <p class="subtitle">Define el canal y la frecuencia de contacto.</p>
 
   <div class="form-grid">
     <div>
@@ -26,6 +26,7 @@
     <h6>Resumen</h6>
     <p>Canal seleccionado: <strong>{{ channel }}</strong></p>
     <p>Frecuencia: <strong>{{ frequency }}</strong></p>
-    <button class="btn btn-success" type="button">Guardar preferencias</button>
+    <button class="btn btn-success btn-sm" type="button" (click)="savePreferences()">Guardar preferencias</button>
+    <div *ngIf="feedback" class="alert alert-info mt-3">{{ feedback }}</div>
   </div>
 </section>

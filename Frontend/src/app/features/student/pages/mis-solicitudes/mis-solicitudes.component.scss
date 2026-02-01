@@ -2,25 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .page-header h2 {
-  margin-bottom: 6px;
-  font-weight: 700;
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .page-header p {
   margin: 0;
   color: #607169;
+  font-size: 13px;
 }
 
 .filters-card {
   background: #fff;
-  padding: 16px;
+  padding: 12px;
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .filters-grid {
@@ -33,29 +35,31 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .summary-card {
   background: #f5f9f6;
   border-radius: 14px;
-  padding: 16px;
+  padding: 12px 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: inset 0 0 0 1px rgba(15, 138, 76, 0.12);
+  font-size: 13px;
 }
 
 .summary-card h4 {
   margin: 0;
   color: #0f8a4c;
   font-weight: 700;
+  font-size: 18px;
 }
 
 .table-card {
   background: #fff;
   border-radius: 18px;
-  padding: 18px;
+  padding: 14px 16px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
@@ -66,12 +70,18 @@
   color: #7a8a82;
 }
 
+.table td,
+.table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .status-chip {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -114,5 +124,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
+  margin-top: 12px;
+  font-size: 13px;
 }

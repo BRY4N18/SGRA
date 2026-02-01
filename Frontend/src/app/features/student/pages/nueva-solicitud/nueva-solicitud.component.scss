@@ -1,29 +1,31 @@
 .wizard-header {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .wizard-header h2 {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .wizard-header p {
   margin: 0;
   color: #607169;
+  font-size: 13px;
 }
 
 .wizard-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .step {
-  padding: 10px 12px;
-  border-radius: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
   background: #eef5f0;
   color: #4f6658;
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   font-weight: 600;
 }
@@ -36,13 +38,14 @@
 .wizard-card {
   background: #fff;
   border-radius: 18px;
-  padding: 22px;
+  padding: 18px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
 .step-content h4 {
-  margin-bottom: 16px;
-  font-weight: 700;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .form-grid {
@@ -60,9 +63,10 @@
   border: 1px solid #d1e5d9;
   background: #f4faf6;
   color: #2d4a3a;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
   font-weight: 600;
+  font-size: 13px;
 }
 
 .chip.active {
@@ -74,20 +78,51 @@
   margin-top: 20px;
 }
 
-.groupmates-grid {
+.groupmates-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.groupmates-header h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.groupmates-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.select-all {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #52645a;
+}
+
+.groupmates-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
+  max-height: 220px;
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .groupmate-card {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px;
+  padding: 10px 12px;
   background: #f4f7f5;
   border-radius: 12px;
   border: 1px solid #e1ece6;
+  font-size: 13px;
 }
 
 .groupmate-card input {
@@ -104,9 +139,10 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   background: #f7faf8;
-  padding: 16px;
+  padding: 12px;
   border-radius: 14px;
   border: 1px solid #e1ece6;
+  font-size: 13px;
 }
 
 .summary-card span {
@@ -116,7 +152,7 @@
 }
 
 .wizard-actions {
-  margin-top: 20px;
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;

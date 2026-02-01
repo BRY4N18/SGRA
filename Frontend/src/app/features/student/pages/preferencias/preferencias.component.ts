@@ -12,4 +12,9 @@ import { FormsModule } from '@angular/forms';
 export class PreferenciasComponent {
   channel = 'Correo';
   frequency = 'Semanal';
+  feedback = '';
+
+  savePreferences() {
+    this.feedback = 'Guardado (mock). Pendiente integración.';
+  }
 }

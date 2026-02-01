@@ -20,7 +20,7 @@
       <div class="form-grid">
         <div>
           <label class="form-label">Asignatura **</label>
-          <select class="form-select" [(ngModel)]="subjectId">
+          <select class="form-select form-select-sm" [(ngModel)]="subjectId">
             <option value="">Selecciona una asignatura</option>
             <option *ngFor="let subject of subjects" [value]="subject.code">
               {{ subject.name }} ({{ subject.code }})
@@ -29,7 +29,7 @@
         </div>
         <div>
           <label class="form-label">Docente **</label>
-          <select class="form-select" [(ngModel)]="teacherId">
+          <select class="form-select form-select-sm" [(ngModel)]="teacherId">
             <option value="">Selecciona un docente</option>
             <option *ngFor="let teacher of teachers" [value]="teacher.id">
               {{ teacher.name }} - {{ teacher.department }}
@@ -44,15 +44,15 @@
       <div class="form-grid">
         <div>
           <label class="form-label">Tema</label>
-          <input class="form-control" placeholder="Ej: Derivadas parciales" [(ngModel)]="topic" />
+          <input class="form-control form-control-sm" placeholder="Ej: Derivadas parciales" [(ngModel)]="topic" />
         </div>
         <div>
           <label class="form-label">Motivo</label>
-          <textarea class="form-control" rows="4" placeholder="Describe brevemente el motivo" [(ngModel)]="reason"></textarea>
+          <textarea class="form-control form-control-sm" rows="4" placeholder="Describe brevemente el motivo" [(ngModel)]="reason"></textarea>
         </div>
         <div>
           <label class="form-label">Adjuntar archivo (opcional)</label>
-          <input class="form-control" type="text" placeholder="Nombre del archivo" [(ngModel)]="attachmentName" />
+          <input class="form-control form-control-sm" type="text" placeholder="Nombre del archivo" [(ngModel)]="attachmentName" />
         </div>
       </div>
     </div>
@@ -85,9 +85,26 @@
       </div>
 
       <div class="groupmates" *ngIf="requestType === 'GRUPAL'">
-        <h6>Selecciona compañeros</h6>
-        <div class="groupmates-grid">
-          <label class="groupmate-card" *ngFor="let mate of groupmates">
+        <div class="groupmates-header">
+          <div>
+            <h6>Selecciona compañeros</h6>
+            <small>Seleccionados: {{ selectedGroupmates.length }}</small>
+          </div>
+          <div class="groupmates-actions">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Buscar compañero"
+              [(ngModel)]="groupmateSearch"
+            />
+            <label class="select-all">
+              <input type="checkbox" [checked]="allGroupmatesSelected" (change)="toggleAllGroupmates($any($event.target).checked)" />
+              Seleccionar todos
+            </label>
+          </div>
+        </div>
+        <div class="groupmates-list">
+          <label class="groupmate-card" *ngFor="let mate of filteredGroupmates">
             <input type="checkbox" [checked]="selectedGroupmates.includes(mate.id)" (change)="toggleGroupmate(mate.id)" />
             <div>
               <strong>{{ mate.name }}</strong>
@@ -103,7 +120,7 @@
       <div class="form-grid">
         <div>
           <label class="form-label">Franja horaria</label>
-          <select class="form-select" [(ngModel)]="selectedTimeSlot">
+          <select class="form-select form-select-sm" [(ngModel)]="selectedTimeSlot">
             <option value="">Selecciona una franja</option>
             <option *ngFor="let slot of timeSlots" [value]="slot.id">{{ slot.label }}</option>
           </select>
@@ -140,7 +157,7 @@
         </div>
       </div>
 
-      <button class="btn btn-success mt-3" (click)="submit()">Enviar solicitud</button>
+      <button class="btn btn-success btn-sm mt-3" (click)="submit()">Enviar solicitud</button>
       <div *ngIf="submittedMessage" class="alert alert-info mt-3">
         {{ submittedMessage }}
       </div>
@@ -148,10 +165,10 @@
   </ng-container>
 
   <div class="wizard-actions">
-    <button class="btn btn-outline-secondary" (click)="cancel()">Cancelar</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="cancel()">Cancelar</button>
     <div class="action-buttons">
-      <button class="btn btn-outline-secondary" (click)="prevStep()" [disabled]="step === 1">Atrás</button>
-      <button class="btn btn-success" (click)="nextStep()" [disabled]="step === 5 || (step === 1 && (!subjectId || !teacherId))">
+      <button class="btn btn-outline-secondary btn-sm" (click)="prevStep()" [disabled]="step === 1">Atrás</button>
+      <button class="btn btn-success btn-sm" (click)="nextStep()" [disabled]="step === 5 || (step === 1 && (!subjectId || !teacherId))">
         Siguiente
       </button>
     </div>

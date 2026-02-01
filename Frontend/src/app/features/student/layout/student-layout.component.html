@@ -42,15 +42,20 @@
   <section class="student-main">
     <header class="student-topbar">
       <div class="topbar-title">
-        <h4>{{ title() }}</h4>
-        <span class="subtitle">Bienvenido, {{ username }}</span>
+        <button class="menu-toggle" type="button" aria-label="Menu">
+          <i class="bi bi-list"></i>
+        </button>
+        <div>
+          <h5>{{ title() }}</h5>
+          <span class="subtitle">Bienvenido, {{ username }}</span>
+        </div>
       </div>
       <div class="topbar-actions">
-        <button class="icon-button" type="button">
+        <button class="icon-button" type="button" aria-label="Notificaciones">
           <i class="bi bi-bell"></i>
         </button>
-        <button class="icon-button" type="button">
-          <i class="bi bi-person-circle"></i>
+        <button class="icon-button avatar" type="button" aria-label="Perfil">
+          <span class="icon-initial">U</span>
         </button>
       </div>
     </header>

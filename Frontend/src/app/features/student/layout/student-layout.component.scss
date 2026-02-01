@@ -14,10 +14,10 @@
 .student-sidebar {
   background: linear-gradient(180deg, #0f8a4c 0%, #0c6a3b 100%);
   color: #fff;
-  padding: 24px 20px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .sidebar-brand {
@@ -27,14 +27,14 @@
 }
 
 .brand-logo {
-  width: 54px;
-  height: 54px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .brand-text {
@@ -43,13 +43,13 @@
 }
 
 .brand-title {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 .brand-subtitle {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.9;
 }
 
@@ -64,16 +64,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 8px 12px;
   border-radius: 12px;
   color: #e7f5ec;
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s ease;
+  font-size: 14px;
 }
 
 .nav-item i {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .nav-item:hover,
@@ -86,12 +87,13 @@
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: transparent;
   color: #fff;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 600;
+  font-size: 13px;
 }
 
 .student-main {
@@ -102,20 +104,39 @@
 .student-topbar {
   background: #0f8a4c;
   color: #fff;
-  padding: 18px 28px;
+  padding: 12px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.topbar-title h4 {
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.topbar-title h5 {
   margin: 0;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .topbar-title .subtitle {
-  font-size: 13px;
+  font-size: 12px;
   opacity: 0.9;
 }
 
@@ -125,18 +146,28 @@
 }
 
 .icon-button {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   display: grid;
   place-items: center;
+  font-size: 16px;
+}
+
+.icon-button.avatar {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.icon-initial {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .student-content {
-  padding: 28px;
+  padding: 22px;
 }
 
 @media (max-width: 992px) {

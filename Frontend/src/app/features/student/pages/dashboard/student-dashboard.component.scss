@@ -1,38 +1,41 @@
 .dashboard-hero {
   background: #ffffff;
-  padding: 24px 28px;
+  padding: 20px 24px;
   border-radius: 18px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .dashboard-hero .welcome {
   color: #0f8a4c;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  font-size: 15px;
 }
 
 .dashboard-hero h2 {
-  margin-bottom: 8px;
-  font-weight: 700;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 22px;
 }
 
 .dashboard-hero .subtitle {
   color: #5c6b64;
   margin: 0;
+  font-size: 13px;
 }
 
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .metric-card {
   background: #ffffff;
   border-radius: 16px;
-  padding: 18px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -42,20 +45,21 @@
 .metric-card h3 {
   margin: 0;
   font-weight: 700;
+  font-size: 20px;
 }
 
 .metric-card span {
   color: #5f6e66;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .metric-icon {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
   border-radius: 14px;
   display: grid;
   place-items: center;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .bg-light-green {
@@ -75,8 +79,9 @@
 }
 
 .quick-actions h4 {
-  margin-bottom: 16px;
-  font-weight: 700;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .actions-grid {
@@ -87,7 +92,7 @@
 
 .action-card {
   background: #ffffff;
-  padding: 20px;
+  padding: 16px;
   border-radius: 18px;
   text-decoration: none;
   color: #1f2b24;
@@ -103,4 +108,5 @@
 .action-card span {
   color: #0f8a4c;
   font-weight: 600;
+  font-size: 13px;
 }

@@ -28,6 +28,7 @@ export class NuevaSolicitudComponent {
   selectedGroupmates: number[] = [];
   selectedTimeSlot = '';
   submittedMessage = '';
+  groupmateSearch = '';
 
   subjects: StudentSubject[] = [];
   teachers: StudentTeacher[] = [];
@@ -64,6 +65,14 @@ export class NuevaSolicitudComponent {
     }
   }
 
+  toggleAllGroupmates(checked: boolean) {
+    if (checked) {
+      this.selectedGroupmates = this.groupmates.map(mate => mate.id);
+      return;
+    }
+    this.selectedGroupmates = [];
+  }
+
   submit() {
     this.submittedMessage = 'Pendiente de integración';
   }
@@ -78,5 +87,15 @@ export class NuevaSolicitudComponent {
 
   get timeSlotLabel(): string {
     return this.timeSlots.find(item => String(item.id) === this.selectedTimeSlot)?.label ?? '-';
+  }
+
+  get filteredGroupmates(): StudentGroupmate[] {
+    const query = this.groupmateSearch.trim().toLowerCase();
+    if (!query) return this.groupmates;
+    return this.groupmates.filter(mate => mate.name.toLowerCase().includes(query));
+  }
+
+  get allGroupmatesSelected(): boolean {
+    return this.groupmates.length > 0 && this.selectedGroupmates.length === this.groupmates.length;
   }
 }
