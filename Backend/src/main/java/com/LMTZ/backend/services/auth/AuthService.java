@@ -53,10 +53,10 @@ public class AuthService {
             throw new BadCredentialsException("Credenciales inválidas");
         }
 
-        String role = resolveRole(access.getUserId().getUserId());
-        String token = jwtService.generateToken(access.getUsername(), access.getUserId().getUserId(), role);
+        String role = resolveRole(access.getUser().getUserId());
+        String token = jwtService.generateToken(access.getUsername(), access.getUser().getUserId(), role);
 
-        return new AuthLoginResponse(token, role, access.getUserId().getUserId(), access.getUsername());
+        return new AuthLoginResponse(token, role, access.getUser().getUserId(), access.getUsername());
     }
 
     private boolean passwordMatches(String storedPassword, String rawPassword) {
