@@ -31,8 +31,8 @@
 }
 
 .brand-logo {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
@@ -40,14 +40,14 @@
   justify-content: center;
   font-size: 20px;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  flex-shrink: 0;
+  flex: 0 0 44px;
+  overflow: hidden;
 }
 
 .brand-logo img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .brand-text {
@@ -57,6 +57,10 @@
 
 .student-shell.is-collapsed .brand-text {
   display: none;
+}
+
+.student-shell.is-collapsed .sidebar-brand {
+  justify-content: center;
 }
 
 .brand-title {
@@ -161,11 +165,16 @@
   border-radius: 10px;
   display: grid;
   place-items: center;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .menu-toggle:hover {
   background: rgba(255, 255, 255, 0.28);
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
 }
 
 .topbar-actions {
