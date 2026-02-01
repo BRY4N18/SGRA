@@ -97,10 +97,14 @@
               placeholder="Buscar compañero"
               [(ngModel)]="groupmateSearch"
             />
-            <label class="select-all">
-              <input type="checkbox" [checked]="allGroupmatesSelected" (change)="toggleAllGroupmates($any($event.target).checked)" />
-              Seleccionar todos
-            </label>
+            <div class="groupmates-buttons">
+              <button class="btn btn-outline-secondary btn-sm" type="button" (click)="selectAllGroupmates()">
+                Seleccionar todo
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearGroupmates()">
+                Limpiar selección
+              </button>
+            </div>
           </div>
         </div>
         <div class="groupmates-list">

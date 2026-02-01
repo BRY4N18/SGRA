@@ -14,6 +14,7 @@ import { filter } from 'rxjs/operators';
 export class StudentLayoutComponent {
   private titleSignal = signal('Dashboard Estudiante');
   username = localStorage.getItem('sgra_username') || 'Estudiante';
+  isSidebarCollapsed = false;
 
   title = computed(() => this.titleSignal());
 
@@ -27,6 +28,10 @@ export class StudentLayoutComponent {
   onLogout() {
     this.auth.logout();
     this.router.navigateByUrl('/login');
+  }
+
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
 
   private getDeepestChild(route: ActivatedRoute): ActivatedRoute {

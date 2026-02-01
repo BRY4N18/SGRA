@@ -11,6 +11,10 @@
   color: #1f2b24;
 }
 
+.student-shell.is-collapsed {
+  grid-template-columns: 92px 1fr;
+}
+
 .student-sidebar {
   background: linear-gradient(180deg, #0f8a4c 0%, #0c6a3b 100%);
   color: #fff;
@@ -40,6 +44,10 @@
 .brand-text {
   display: flex;
   flex-direction: column;
+}
+
+.student-shell.is-collapsed .brand-text {
+  display: none;
 }
 
 .brand-title {
@@ -73,6 +81,19 @@
   font-size: 14px;
 }
 
+.nav-label {
+  white-space: nowrap;
+}
+
+.student-shell.is-collapsed .nav-item {
+  justify-content: center;
+  padding: 10px;
+}
+
+.student-shell.is-collapsed .nav-label {
+  display: none;
+}
+
 .nav-item i {
   font-size: 16px;
 }
@@ -94,6 +115,11 @@
   gap: 8px;
   font-weight: 600;
   font-size: 13px;
+}
+
+.student-shell.is-collapsed .sidebar-logout {
+  justify-content: center;
+  padding: 10px;
 }
 
 .student-main {
@@ -155,6 +181,12 @@
   display: grid;
   place-items: center;
   font-size: 16px;
+}
+
+.icon-svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 .icon-button.avatar {

@@ -65,11 +65,11 @@ export class NuevaSolicitudComponent {
     }
   }
 
-  toggleAllGroupmates(checked: boolean) {
-    if (checked) {
-      this.selectedGroupmates = this.groupmates.map(mate => mate.id);
-      return;
-    }
+  selectAllGroupmates() {
+    this.selectedGroupmates = this.groupmates.map(mate => mate.id);
+  }
+
+  clearGroupmates() {
     this.selectedGroupmates = [];
   }
 
@@ -95,7 +95,4 @@ export class NuevaSolicitudComponent {
     return this.groupmates.filter(mate => mate.name.toLowerCase().includes(query));
   }
 
-  get allGroupmatesSelected(): boolean {
-    return this.groupmates.length > 0 && this.selectedGroupmates.length === this.groupmates.length;
-  }
 }

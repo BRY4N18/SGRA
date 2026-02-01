@@ -1,4 +1,4 @@
-<div class="student-shell">
+<div class="student-shell" [class.is-collapsed]="isSidebarCollapsed">
   <aside class="student-sidebar">
     <div class="sidebar-brand">
       <div class="brand-logo">
@@ -11,38 +11,70 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a routerLink="/dashboard/estudiante" routerLinkActive="active" class="nav-item" [routerLinkActiveOptions]="{ exact: true }">
+      <a
+        routerLink="/dashboard/estudiante"
+        routerLinkActive="active"
+        class="nav-item"
+        [routerLinkActiveOptions]="{ exact: true }"
+        title="Dashboard"
+      >
         <i class="bi bi-grid"></i>
-        Dashboard
+        <span class="nav-label">Dashboard</span>
       </a>
-      <a routerLink="/dashboard/estudiante/nueva-solicitud" routerLinkActive="active" class="nav-item">
+      <a
+        routerLink="/dashboard/estudiante/nueva-solicitud"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Nueva Solicitud"
+      >
         <i class="bi bi-file-earmark-plus"></i>
-        Nueva Solicitud
+        <span class="nav-label">Nueva Solicitud</span>
       </a>
-      <a routerLink="/dashboard/estudiante/mis-solicitudes" routerLinkActive="active" class="nav-item">
+      <a
+        routerLink="/dashboard/estudiante/mis-solicitudes"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Mis Solicitudes"
+      >
         <i class="bi bi-journal-text"></i>
-        Mis Solicitudes
+        <span class="nav-label">Mis Solicitudes</span>
       </a>
-      <a routerLink="/dashboard/estudiante/historial" routerLinkActive="active" class="nav-item">
+      <a
+        routerLink="/dashboard/estudiante/historial"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Historial"
+      >
         <i class="bi bi-clock-history"></i>
-        Historial
+        <span class="nav-label">Historial</span>
       </a>
-      <a routerLink="/dashboard/estudiante/preferencias" routerLinkActive="active" class="nav-item">
+      <a
+        routerLink="/dashboard/estudiante/preferencias"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Preferencias"
+      >
         <i class="bi bi-gear"></i>
-        Preferencias
+        <span class="nav-label">Preferencias</span>
       </a>
     </nav>
 
-    <button class="sidebar-logout" type="button" (click)="onLogout()">
+    <button class="sidebar-logout" type="button" (click)="onLogout()" title="Cerrar sesión">
       <i class="bi bi-box-arrow-right"></i>
-      Cerrar sesión
+      <span class="nav-label">Cerrar sesión</span>
     </button>
   </aside>
 
   <section class="student-main">
     <header class="student-topbar">
       <div class="topbar-title">
-        <button class="menu-toggle" type="button" aria-label="Menu">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Menu"
+          [attr.aria-expanded]="!isSidebarCollapsed"
+          (click)="toggleSidebar()"
+        >
           <i class="bi bi-list"></i>
         </button>
         <div>
@@ -52,10 +84,18 @@
       </div>
       <div class="topbar-actions">
         <button class="icon-button" type="button" aria-label="Notificaciones">
-          <i class="bi bi-bell"></i>
+          <svg viewBox="0 0 24 24" class="icon-svg" aria-hidden="true">
+            <path
+              d="M12 2a4 4 0 0 0-4 4v1.2a6.5 6.5 0 0 0-3 5.6v3.5l-1.4 2a1 1 0 0 0 .8 1.6h15.2a1 1 0 0 0 .8-1.6l-1.4-2V12.8a6.5 6.5 0 0 0-3-5.6V6a4 4 0 0 0-4-4Zm0 20a2.5 2.5 0 0 0 2.4-2h-4.8A2.5 2.5 0 0 0 12 22Z"
+            />
+          </svg>
         </button>
         <button class="icon-button avatar" type="button" aria-label="Perfil">
-          <span class="icon-initial">U</span>
+          <svg viewBox="0 0 24 24" class="icon-svg" aria-hidden="true">
+            <path
+              d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5Z"
+            />
+          </svg>
         </button>
       </div>
     </header>

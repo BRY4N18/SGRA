@@ -21,7 +21,8 @@
   background: #fff;
   padding: 12px;
   border-radius: 16px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
   margin-bottom: 16px;
 }
 
@@ -60,7 +61,8 @@
   background: #fff;
   border-radius: 18px;
   padding: 14px 16px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
 }
 
 .table thead th {
