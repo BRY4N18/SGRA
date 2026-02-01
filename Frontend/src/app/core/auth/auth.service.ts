@@ -2,43 +2,56 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
-type Role = 'Admin' | 'Coordinador' | 'Docente' | 'Estudiante';
+export type Role = 'STUDENT' | 'TEACHER' | 'COORDINATOR' | 'ADMIN';
+
+export interface AuthResponse {
+  token: string;
+  role: Role;
+  userId: number;
+  username: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/SGRA/login';
+  private apiUrl = '/api/auth/login';
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
-    const loginData = { email, password };
+  login(username: string, password: string): Observable<AuthResponse> {
+    const loginData = { username, password };
 
-    // Realizamos la petición POST al backend
-    return this.http.post<any>(this.apiUrl, loginData).pipe(
+    return this.http.post<AuthResponse>(this.apiUrl, loginData).pipe(
       tap(res => {
-        // Si el login es exitoso (según tu LoginDTO.success), guardamos la sesión
-        if (res && res.success) {
+        if (res?.token) {
           this.saveSession(res);
         }
       })
     );
   }
 
-  saveSession(data: any) {
-    localStorage.setItem('sgra_auth', JSON.stringify(data));
-    localStorage.setItem('userRole', data.role);
+  saveSession(data: AuthResponse) {
+    localStorage.setItem('sgra_token', data.token);
+    localStorage.setItem('sgra_role', data.role);
+    localStorage.setItem('sgra_user_id', String(data.userId));
+    localStorage.setItem('sgra_username', data.username);
   }
 
-  isLoggedIn(): boolean {
-    const authData = localStorage.getItem('sgra_auth');
-    return !!authData;
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('sgra_token');
   }
 
-  getRole(): string | null {
-    return localStorage.getItem('userRole');
+  getRole(): Role | null {
+    return localStorage.getItem('sgra_role') as Role | null;
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('sgra_token');
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('sgra_token');
+    localStorage.removeItem('sgra_role');
+    localStorage.removeItem('sgra_user_id');
+    localStorage.removeItem('sgra_username');
   }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -9,4 +11,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  constructor(private auth: AuthService, private router: Router) {}
+
+  onLogout() {
+    this.auth.logout();
+    this.router.navigateByUrl('/login');
+  }
+}
