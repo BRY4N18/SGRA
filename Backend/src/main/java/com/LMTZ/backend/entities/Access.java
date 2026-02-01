@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "tbaccesos")
+@Table(name = "tbaccesos", schema = "sgra")
 public class Access {
     @Id
     @Column(name = "idaccesso")
@@ -30,7 +30,7 @@ public class Access {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idusuario", foreignKey = @ForeignKey(name = "fk_acceso_usuario"))
-    private User userId;
+    private User user;
 
     @Column(name = "nombreusuario", length = 50, nullable = false)
     private String username;
