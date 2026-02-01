@@ -1,0 +1,56 @@
+<section class="hero-card">
+  <div>
+    <h2>Gestión de Disponibilidad</h2>
+    <p>Selecciona las franjas horarias disponibles para refuerzos académicos.</p>
+  </div>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot available"></span> Disponible</span>
+    <span class="legend-item"><span class="legend-dot busy"></span> No disponible</span>
+    <span class="legend-item"><span class="legend-dot session"></span> Sesión programada</span>
+  </div>
+</section>
+
+<section class="availability-card">
+  <div class="availability-grid">
+    <div class="grid-header">
+      <div class="time-cell"></div>
+      <div class="day-cell" *ngFor="let day of days">{{ day }}</div>
+    </div>
+    <div class="grid-row" *ngFor="let time of times">
+      <div class="time-cell">{{ time }}</div>
+      <button
+        class="slot"
+        type="button"
+        *ngFor="let day of days"
+        [ngClass]="getStatusClass(day, time)"
+        (click)="toggleSlot(getSlot(day, time))"
+      ></button>
+    </div>
+  </div>
+
+  <div class="availability-actions">
+    <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearAll()">Limpiar Todo</button>
+    <button class="btn btn-success btn-sm" type="button" (click)="saveChanges()">Guardar Cambios</button>
+  </div>
+
+  <div *ngIf="feedback" class="alert alert-info mt-3">{{ feedback }}</div>
+</section>
+
+<section class="summary-card">
+  <div>
+    <h4>Resumen semanal</h4>
+    <p>Disponibles: <strong>{{ stats.disponibles }}</strong></p>
+    <p>Sesiones programadas: <strong>{{ stats.programadas }}</strong></p>
+    <p>Horas semanales: <strong>{{ stats.horasSemanales }}</strong></p>
+    <p>Días con disponibilidad: <strong>{{ stats.diasActivos }}</strong></p>
+  </div>
+  <div class="distribution">
+    <div class="bar" *ngFor="let item of stats.distribucion">
+      <span>{{ item.day }}</span>
+      <div class="bar-track">
+        <div class="bar-fill" [style.width.%]="item.hours * 10"></div>
+      </div>
+      <small>{{ item.hours }} h</small>
+    </div>
+  </div>
+</section>

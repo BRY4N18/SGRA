@@ -1,0 +1,106 @@
+<section class="hero-card">
+  <div>
+    <h2>Bienvenido, {{ username }}</h2>
+    <p>Panel de gestión de refuerzos académicos</p>
+  </div>
+  <a class="btn btn-success btn-sm" routerLink="/dashboard/docente/disponibilidad">
+    Gestionar disponibilidad
+  </a>
+</section>
+
+<section class="metrics-grid">
+  <article class="metric-card">
+    <div class="metric-icon">📥</div>
+    <div>
+      <h3>{{ summary.pendientes }}</h3>
+      <span>Solicitudes Pendientes</span>
+    </div>
+  </article>
+  <article class="metric-card">
+    <div class="metric-icon">📅</div>
+    <div>
+      <h3>{{ summary.programadas }}</h3>
+      <span>Sesiones Programadas</span>
+    </div>
+  </article>
+  <article class="metric-card">
+    <div class="metric-icon">✅</div>
+    <div>
+      <h3>{{ summary.completadas }}</h3>
+      <span>Sesiones Completadas</span>
+    </div>
+  </article>
+  <article class="metric-card">
+    <div class="metric-icon">🎓</div>
+    <div>
+      <h3>{{ summary.atendidos }}</h3>
+      <span>Estudiantes Atendidos</span>
+    </div>
+  </article>
+</section>
+
+<section class="dashboard-grid">
+  <div class="panel-card">
+    <div class="panel-header">
+      <h4>Solicitudes Pendientes de Revisión</h4>
+      <a class="btn btn-outline-success btn-sm" routerLink="/dashboard/docente/solicitudes">
+        Ver todas las solicitudes
+      </a>
+    </div>
+    <ul class="panel-list" *ngIf="pendingRequests.length; else noRequests">
+      <li *ngFor="let request of pendingRequests">
+        <div>
+          <strong>{{ request.studentName }}</strong>
+          <small>{{ request.subject }} • {{ request.topic }}</small>
+        </div>
+        <span class="chip">{{ request.type }}</span>
+      </li>
+    </ul>
+    <ng-template #noRequests>
+      <div class="empty-state">No hay solicitudes pendientes por revisar.</div>
+    </ng-template>
+  </div>
+
+  <div class="panel-card">
+    <div class="panel-header">
+      <h4>Próximas Sesiones</h4>
+      <button class="btn btn-outline-success btn-sm" type="button">
+        Ver calendario completo
+      </button>
+    </div>
+    <ul class="panel-list" *ngIf="upcomingSessions.length; else noSessions">
+      <li *ngFor="let session of upcomingSessions">
+        <div>
+          <strong>{{ session.subject }}</strong>
+          <small>{{ session.dateLabel }} • {{ session.student }}</small>
+        </div>
+        <span class="chip chip-muted">{{ session.modality }}</span>
+      </li>
+    </ul>
+    <ng-template #noSessions>
+      <div class="empty-state">No hay sesiones programadas por ahora.</div>
+    </ng-template>
+  </div>
+</section>
+
+<section class="actions-section">
+  <h4>Acciones rápidas</h4>
+  <div class="actions-grid">
+    <a class="action-card" routerLink="/dashboard/docente/solicitudes">
+      <h5>Revisar Solicitudes</h5>
+      <p>Gestiona solicitudes pendientes y confirma horarios.</p>
+    </a>
+    <a class="action-card" routerLink="/dashboard/docente/disponibilidad">
+      <h5>Mi Disponibilidad</h5>
+      <p>Actualiza tu agenda semanal de refuerzos.</p>
+    </a>
+    <a class="action-card" routerLink="/dashboard/docente/sesiones">
+      <h5>Agrupar Sesiones</h5>
+      <p>Consulta y administra tus sesiones activas.</p>
+    </a>
+    <a class="action-card" routerLink="/dashboard/docente/reportes">
+      <h5>Mis Reportes</h5>
+      <p>Accede a indicadores y estadísticas académicas.</p>
+    </a>
+  </div>
+</section>

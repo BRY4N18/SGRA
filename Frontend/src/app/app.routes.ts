@@ -60,6 +60,52 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'dashboard/docente',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['TEACHER'] },
+    loadComponent: () =>
+      import('./features/teacher/layout/teacher-layout.component').then(
+        m => m.TeacherLayoutComponent
+      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/teacher/pages/dashboard/teacher-dashboard.component').then(
+            m => m.TeacherDashboardComponent
+          ),
+      },
+      {
+        path: 'solicitudes',
+        loadComponent: () =>
+          import('./features/teacher/pages/solicitudes/solicitudes.component').then(
+            m => m.SolicitudesComponent
+          ),
+      },
+      {
+        path: 'disponibilidad',
+        loadComponent: () =>
+          import('./features/teacher/pages/disponibilidad/disponibilidad.component').then(
+            m => m.DisponibilidadComponent
+          ),
+      },
+      {
+        path: 'sesiones',
+        loadComponent: () =>
+          import('./features/teacher/pages/sesiones/sesiones.component').then(
+            m => m.SesionesComponent
+          ),
+      },
+      {
+        path: 'reportes',
+        loadComponent: () =>
+          import('./features/teacher/pages/reportes/reportes.component').then(
+            m => m.ReportesComponent
+          ),
+      },
+    ],
+  },
 
   {
     path: 'dashboard',
@@ -81,14 +127,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboards/coordinatorDashboard/coordinatorDashboard.component')
             .then(m => m.CoordinatorDashboardComponent),
-      },
-      {
-        path: 'docente',
-        canActivate: [roleGuard],
-        data: { roles: ['TEACHER'] },
-        loadComponent: () =>
-          import('./features/dashboards/teacherDashboard/teacherDashboard.component')
-            .then(m => m.TeacherDashboardComponent),
       },
       {
         path: 'en-construccion',
