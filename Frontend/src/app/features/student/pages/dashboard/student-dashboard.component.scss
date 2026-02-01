@@ -1,7 +1,7 @@
 .dashboard-hero {
   background: #ffffff;
   padding: 20px 24px;
-  border-radius: 18px;
+  border-radius: 12px;
   border: 1px solid #e3ebe6;
   box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
   margin-bottom: 20px;
@@ -28,7 +28,7 @@
 
 .metric-card {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 14px 16px;
   display: flex;
   align-items: center;
@@ -51,7 +51,7 @@
 .metric-icon {
   width: 40px;
   height: 40px;
-  border-radius: 14px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   font-size: 18px;
@@ -88,7 +88,7 @@
 .action-card {
   background: #ffffff;
   padding: 16px;
-  border-radius: 18px;
+  border-radius: 12px;
   text-decoration: none;
   color: #1f2b24;
   border: 1px solid #e3ebe6;

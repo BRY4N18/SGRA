@@ -42,18 +42,8 @@ export class StudentLayoutComponent {
   }
 
   selectRole(role: string) {
-    localStorage.setItem('sgra_active_role', role);
     this.activeRole = role;
     this.isRoleMenuOpen = false;
-
-    const redirectMap: Record<string, string> = {
-      STUDENT: '/dashboard/estudiante',
-      TEACHER: '/dashboard/docente',
-      ADMIN: '/dashboard/en-construccion',
-      COORDINATOR: '/dashboard/en-construccion',
-    };
-
-    this.router.navigateByUrl(redirectMap[role] ?? '/dashboard/en-construccion');
   }
 
   formatRole(role: string): string {
@@ -68,7 +58,6 @@ export class StudentLayoutComponent {
 
   private getActiveRole(): string {
     return (
-      localStorage.getItem('sgra_active_role') ||
       localStorage.getItem('sgra_role') ||
       'STUDENT'
     );
