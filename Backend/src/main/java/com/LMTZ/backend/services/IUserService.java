@@ -1,7 +1,7 @@
 package com.LMTZ.backend.services;
 
-import com.LMTZ.backend.dtos.LoginDTO;
+import com.LMTZ.backend.dtos.LoginResponseDTO;
 
 public interface IUserService {
-    LoginDTO Login(String email, String password);
+    LoginResponseDTO login(String email, String password);
 }

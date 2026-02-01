@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tbusuarios")
+@Table(name = "tbusuarios", schema = "sgra")
 public class User {
     @Id
     @Column(name = "idusuario")
@@ -43,7 +43,7 @@ public class User {
     @Column(name = "direccion", length = 200, nullable = false)
     private String address;
 
-    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Access access;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)

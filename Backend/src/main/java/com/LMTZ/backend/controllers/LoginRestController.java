@@ -3,7 +3,8 @@ package com.LMTZ.backend.controllers;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.LMTZ.backend.dtos.LoginDTO;
+import com.LMTZ.backend.dtos.LoginRequestDTO;
+import com.LMTZ.backend.dtos.LoginResponseDTO;
 import com.LMTZ.backend.services.IUserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,8 +24,8 @@ public class LoginRestController {
     private final IUserService userSer;
 
     @PostMapping("/login")
-    public LoginDTO postMethodName(
-        @RequestBody LoginDTO loginRequest,
+    public LoginResponseDTO postMethodName(
+        @RequestBody LoginRequestDTO loginRequest,
         HttpServletRequest request,
         HttpSession session,
         org.springframework.ui.Model model
@@ -33,7 +34,7 @@ public class LoginRestController {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
 
-        LoginDTO answerDto = userSer.Login(email, password);
+        LoginResponseDTO answerDto = userSer.login(email, password);
 
         if(answerDto != null && answerDto.getSuccess()){
             request.setAttribute("ipOrigen", request.getRemoteAddr());
