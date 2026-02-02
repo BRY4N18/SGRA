@@ -1,0 +1,131 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-header h2 {
+  margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #607169;
+  font-size: 13px;
+}
+
+.filters-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+  margin-bottom: 16px;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.summary-card {
+  background: #f5f9f6;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0 0 0 1px rgba(15, 138, 76, 0.12);
+  font-size: 13px;
+}
+
+.summary-card h4 {
+  margin: 0;
+  color: #0f8a4c;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+}
+
+.table thead th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #7a8a82;
+}
+
+.table td,
+.table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.chip-warning {
+  background: #fff1d6;
+  color: #a66200;
+}
+
+.chip-success {
+  background: #dff5ea;
+  color: #0f8a4c;
+}
+
+.chip-info {
+  background: #e0f1ff;
+  color: #1f6ca5;
+}
+
+.chip-neutral {
+  background: #e9ecef;
+  color: #4b5563;
+}
+
+.chip-wait {
+  background: #ffe3ea;
+  color: #b42348;
+}
+
+.chip-individual {
+  background: #f2f4ff;
+  color: #3b4cca;
+}
+
+.chip-group {
+  background: #e5f5ff;
+  color: #1976a2;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 13px;
+}

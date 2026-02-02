@@ -1,0 +1,50 @@
+<section class="page-header">
+  <div>
+    <h2>Sesiones</h2>
+    <p>Consulta sesiones programadas e historial de refuerzos.</p>
+  </div>
+</section>
+
+<div class="filters">
+  <input class="form-control form-control-sm" placeholder="Buscar estudiante o asignatura" [(ngModel)]="search" />
+  <select class="form-select form-select-sm" [(ngModel)]="modeFilter">
+    <option value="">Modalidad</option>
+    <option value="Presencial">Presencial</option>
+    <option value="Virtual">Virtual</option>
+  </select>
+</div>
+
+<div class="tabs">
+  <button class="tab" [class.active]="activeTab === 'PROGRAMADA'" type="button" (click)="setTab('PROGRAMADA')">
+    Programadas
+  </button>
+  <button class="tab" [class.active]="activeTab === 'COMPLETADA'" type="button" (click)="setTab('COMPLETADA')">
+    Historial
+  </button>
+</div>
+
+<section class="session-list">
+  <article class="session-card" *ngFor="let session of filteredSessions">
+    <div>
+      <h4>{{ session.subject }}</h4>
+      <small>{{ session.dateLabel }} • {{ session.student }}</small>
+      <p><strong>Modalidad:</strong> {{ session.modality }}</p>
+      <a *ngIf="session.link" class="link" href="#">{{ session.link }}</a>
+    </div>
+    <div class="session-actions">
+      <button class="btn btn-outline-success btn-sm" type="button">Ver detalle</button>
+      <button
+        *ngIf="session.status === 'PROGRAMADA'"
+        class="btn btn-success btn-sm"
+        type="button"
+        (click)="markCompleted(session)"
+      >
+        Marcar como realizada
+      </button>
+    </div>
+  </article>
+
+  <div class="empty-state" *ngIf="!filteredSessions.length">
+    No hay sesiones para mostrar.
+  </div>
+</section>

@@ -1,0 +1,41 @@
+.preferences-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+}
+
+.preferences-card h3 {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
+.preferences-card p {
+  color: #5d6e65;
+  font-size: 13px;
+}
+
+.preferences-card .subtitle {
+  margin-bottom: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.summary-box {
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f4f7f5;
+  border: 1px solid #d7e6dc;
+}
+
+.summary-box h6 {
+  font-weight: 700;
+}

@@ -1,0 +1,31 @@
+.placeholder-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+}
+
+.placeholder-card h2 {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 22px;
+}
+
+.placeholder-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.placeholder-item {
+  padding: 16px;
+  border-radius: 12px;
+  background: #f4f7f5;
+  border: 1px dashed #d5e4da;
+}
+
+.placeholder-item strong {
+  display: block;
+}

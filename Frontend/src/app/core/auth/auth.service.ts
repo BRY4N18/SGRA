@@ -41,7 +41,8 @@ export class AuthService {
   }
 
   getRole(): Role | null {
-    return localStorage.getItem('sgra_role') as Role | null;
+    return (localStorage.getItem('sgra_active_role') ||
+      localStorage.getItem('sgra_role')) as Role | null;
   }
 
   getToken(): string | null {

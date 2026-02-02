@@ -31,13 +31,13 @@ export class LoginComponent {
     this.auth.login(this.user.trim(), this.pass).subscribe({
       next: (res) => {
         const map: Record<Role, string> = {
-          ADMIN: '/dashboard/admin',
-          COORDINATOR: '/dashboard/coordinador',
+          ADMIN: '/dashboard/en-construccion',
+          COORDINATOR: '/dashboard/en-construccion',
           TEACHER: '/dashboard/docente',
           STUDENT: '/dashboard/estudiante',
         };
 
-        this.router.navigateByUrl(map[res.role] ?? '/dashboard/estudiante');
+        this.router.navigateByUrl(map[res.role] ?? '/dashboard/en-construccion');
       },
       error: (err) => {
         if (err?.status === 401) {

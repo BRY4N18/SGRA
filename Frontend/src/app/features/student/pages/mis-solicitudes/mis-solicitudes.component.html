@@ -1,0 +1,119 @@
+<section class="page-header">
+  <div>
+    <h2>Mis Solicitudes</h2>
+    <p>Gestiona y realiza seguimiento a tus solicitudes de refuerzo académico.</p>
+  </div>
+  <a class="btn btn-success btn-sm" routerLink="/dashboard/estudiante/nueva-solicitud">
+    + Nueva Solicitud
+  </a>
+</section>
+
+<section class="filters-card">
+  <div class="filters-grid">
+    <input class="form-control form-control-sm" placeholder="Buscar por tema o asignatura" [(ngModel)]="searchTerm" />
+    <select class="form-select form-select-sm" [(ngModel)]="selectedStatus">
+      <option value="">Estado</option>
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+    <select class="form-select form-select-sm" [(ngModel)]="selectedSubject">
+      <option value="">Asignatura</option>
+      <option *ngFor="let subject of subjects" [value]="subject.code">
+        {{ subject.name }} ({{ subject.code }})
+      </option>
+    </select>
+    <select class="form-select form-select-sm" [(ngModel)]="selectedType">
+      <option value="">Tipo</option>
+      <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+    </select>
+    <button class="btn btn-outline-secondary btn-sm" (click)="clearFilters()">Limpiar</button>
+  </div>
+</section>
+
+<section class="summary-grid">
+  <article class="summary-card">
+    <span>Pendientes</span>
+    <h4>2</h4>
+  </article>
+  <article class="summary-card">
+    <span>Aceptadas</span>
+    <h4>3</h4>
+  </article>
+  <article class="summary-card">
+    <span>Programadas</span>
+    <h4>1</h4>
+  </article>
+  <article class="summary-card">
+    <span>Completadas</span>
+    <h4>6</h4>
+  </article>
+</section>
+
+<section class="table-card">
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Asignatura</th>
+          <th>Tema</th>
+          <th>Docente</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of pagedRequests">
+          <td>
+            <div class="fw-semibold">{{ request.createdAt }}</div>
+            <small class="text-muted">{{ request.subject.code }}</small>
+          </td>
+          <td>
+            <div class="fw-semibold">{{ request.subject.name }}</div>
+            <small class="text-muted">{{ request.subject.code }}</small>
+          </td>
+          <td>{{ request.topic }}</td>
+          <td>{{ request.teacher.name }}</td>
+          <td>
+            <span class="status-chip" [ngClass]="getTypeClass(request.type)">
+              {{ request.type }}
+            </span>
+          </td>
+          <td>
+            <span class="status-chip" [ngClass]="getStatusClass(request.status)">
+              {{ request.status }}
+            </span>
+          </td>
+          <td>
+            <div class="dropdown">
+              <button
+                class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                •••
+              </button>
+              <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button">Ver detalle</button></li>
+                <li><button class="dropdown-item" type="button">Reprogramar</button></li>
+                <li><button class="dropdown-item text-danger" type="button">Cancelar</button></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pagination-bar">
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <div class="btn-group">
+      <button class="btn btn-outline-secondary btn-sm" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        Anterior
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</section>

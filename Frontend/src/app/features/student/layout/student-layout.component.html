@@ -1,0 +1,117 @@
+<div class="student-shell" [class.is-collapsed]="isSidebarCollapsed">
+  <aside class="student-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">
+        <img src="/SGRAicono.ico" alt="SGRA" />
+      </div>
+      <div class="brand-text">
+        <span class="brand-title">SGRA</span>
+        <span class="brand-subtitle">UTEQ</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a
+        routerLink="/dashboard/estudiante"
+        routerLinkActive="active"
+        class="nav-item"
+        [routerLinkActiveOptions]="{ exact: true }"
+        title="Dashboard"
+      >
+        <i class="bi bi-grid"></i>
+        <span class="nav-label">Dashboard</span>
+      </a>
+      <a
+        routerLink="/dashboard/estudiante/nueva-solicitud"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Nueva Solicitud"
+      >
+        <i class="bi bi-file-earmark-plus"></i>
+        <span class="nav-label">Nueva Solicitud</span>
+      </a>
+      <a
+        routerLink="/dashboard/estudiante/mis-solicitudes"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Mis Solicitudes"
+      >
+        <i class="bi bi-journal-text"></i>
+        <span class="nav-label">Mis Solicitudes</span>
+      </a>
+      <a
+        routerLink="/dashboard/estudiante/historial"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Historial"
+      >
+        <i class="bi bi-clock-history"></i>
+        <span class="nav-label">Historial</span>
+      </a>
+      <a
+        routerLink="/dashboard/estudiante/preferencias"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Preferencias"
+      >
+        <i class="bi bi-gear"></i>
+        <span class="nav-label">Preferencias</span>
+      </a>
+    </nav>
+
+    <button class="sidebar-logout" type="button" (click)="onLogout()" title="Cerrar sesión">
+      <i class="bi bi-box-arrow-right"></i>
+      <span class="nav-label">Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <section class="student-main">
+    <header class="student-topbar">
+      <div class="topbar-title">
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Menu"
+          [attr.aria-expanded]="!isSidebarCollapsed"
+          (click)="toggleSidebar()"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-button" type="button" aria-label="Notificaciones">
+          <svg viewBox="0 0 24 24" class="icon-svg" aria-hidden="true">
+            <path
+              d="M12 2a4 4 0 0 0-4 4v1.2a6.5 6.5 0 0 0-3 5.6v3.5l-1.4 2a1 1 0 0 0 .8 1.6h15.2a1 1 0 0 0 .8-1.6l-1.4-2V12.8a6.5 6.5 0 0 0-3-5.6V6a4 4 0 0 0-4-4Zm0 20a2.5 2.5 0 0 0 2.4-2h-4.8A2.5 2.5 0 0 0 12 22Z"
+            />
+          </svg>
+        </button>
+        <div class="role-selector" [class.open]="isRoleMenuOpen">
+          <button class="role-button" type="button" (click)="toggleRoleMenu()">
+            <svg viewBox="0 0 24 24" class="icon-svg" aria-hidden="true">
+              <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5Z" />
+            </svg>
+            <span class="role-label">Rol: {{ formatRole(activeRole) }}</span>
+            <svg viewBox="0 0 24 24" class="icon-svg" aria-hidden="true">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
+          </button>
+          <div class="role-menu" *ngIf="isRoleMenuOpen">
+            <button
+              class="role-option"
+              type="button"
+              *ngFor="let role of availableRoles"
+              (click)="selectRole(role)"
+            >
+              {{ formatRole(role) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="student-content">
+      <router-outlet></router-outlet>
+    </main>
+  </section>
+</div>

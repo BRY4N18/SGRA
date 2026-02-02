@@ -1,0 +1,112 @@
+<section class="page-header">
+  <div>
+    <h2><span class="header-icon">📋</span> Gestión de Solicitudes</h2>
+    <p>Revisa y responde las solicitudes de refuerzo académico</p>
+  </div>
+</section>
+
+<div class="tabs">
+  <button
+    *ngFor="let tab of tabs"
+    class="tab"
+    [class.active]="activeStatus === tab.status"
+    type="button"
+    (click)="setTab(tab.status)"
+  >
+    <span class="tab-icon">{{ tab.icon }}</span>
+    {{ tab.label }}
+    <span class="tab-badge" *ngIf="tab.status === 'PENDIENTE'">{{ pendingCount }}</span>
+  </button>
+</div>
+
+<section class="request-grid">
+  <article class="request-card" *ngFor="let request of filteredRequests">
+    <div class="card-header">
+      <div class="avatar">👤</div>
+      <div class="header-info">
+        <h4>{{ request.studentName }}</h4>
+        <small>{{ request.studentEmail }}</small>
+      </div>
+      <div class="header-meta">
+        <span class="chip">
+          <span class="chip-icon">👤</span>
+          {{ request.type === 'INDIVIDUAL' ? 'Individual' : 'Grupal' }}
+        </span>
+        <span class="date">{{ request.dateLabel }}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        <span class="info-icon">📘</span>
+        <div>
+          <small>Asignatura</small>
+          <p>{{ request.subject }}</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📝</span>
+        <div>
+          <small>Tema</small>
+          <p>{{ request.topic }}</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📄</span>
+        <div>
+          <small>Motivo</small>
+          <p>{{ request.reason }}</p>
+        </div>
+      </div>
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div>
+          <small>Modalidad</small>
+          <p>{{ request.mode === 'PRESENCIAL' ? 'Presencial' : 'Virtual' }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-light btn-sm" type="button" (click)="openDetail(request)">
+        👁 Ver más
+      </button>
+      <button class="btn btn-danger btn-sm" type="button" (click)="reject(request)">
+        ✕ Rechazar
+      </button>
+      <button class="btn btn-primary btn-sm" type="button" (click)="accept(request)">
+        ✓ Aceptar
+      </button>
+    </div>
+  </article>
+
+  <div class="empty-state" *ngIf="!filteredRequests.length">
+    No existen solicitudes en esta categoría.
+  </div>
+</section>
+
+<div class="toast" *ngIf="feedbackMessage" [class.toast-success]="feedbackType === 'success'" [class.toast-danger]="feedbackType === 'danger'">
+  {{ feedbackMessage }}
+</div>
+
+<div class="modal-backdrop" *ngIf="selectedRequest">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h4>Detalle de Solicitud</h4>
+      <button class="btn-close" type="button" (click)="closeDetail()"></button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Estudiante:</strong> {{ selectedRequest!.studentName }}</p>
+      <p><strong>Correo:</strong> {{ selectedRequest!.studentEmail }}</p>
+      <p><strong>Asignatura:</strong> {{ selectedRequest!.subject }}</p>
+      <p><strong>Tema:</strong> {{ selectedRequest!.topic }}</p>
+      <p><strong>Motivo:</strong> {{ selectedRequest!.reason }}</p>
+      <p><strong>Modalidad:</strong> {{ selectedRequest!.mode }}</p>
+      <p><strong>Tipo:</strong> {{ selectedRequest!.type }}</p>
+      <p><strong>Fecha:</strong> {{ selectedRequest!.dateLabel }}</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="closeDetail()">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
