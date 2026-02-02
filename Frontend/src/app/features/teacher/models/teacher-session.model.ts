@@ -1,11 +1,17 @@
-export type TeacherSessionStatus = 'PROGRAMADA' | 'COMPLETADA';
+export type TeacherSessionStatus = 'PROGRAMADA' | 'EN_CURSO' | 'REALIZADA';
+export type TeacherSessionType = 'INDIVIDUAL' | 'GRUPAL';
 
 export interface TeacherSession {
   id: number;
   dateLabel: string;
   subject: string;
+  topic: string;
   student: string;
-  modality: string;
+  modality: 'Presencial' | 'Virtual';
+  type: TeacherSessionType;
   status: TeacherSessionStatus;
-  link?: string;
+  attendanceOpen?: boolean;
+  observations?: string;
+  results?: string;
+  finalStatus?: string;
 }

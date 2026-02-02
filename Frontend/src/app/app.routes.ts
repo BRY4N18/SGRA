@@ -104,6 +104,13 @@ export const routes: Routes = [
             m => m.ReportesComponent
           ),
       },
+      {
+        path: 'preferencias',
+        loadComponent: () =>
+          import('./features/teacher/pages/preferencias/preferencias.component').then(
+            m => m.PreferenciasComponent
+          ),
+      },
     ],
   },
 

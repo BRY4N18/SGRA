@@ -1,0 +1,71 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-header h2 {
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #607169;
+  font-size: 13px;
+}
+
+.header-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e6f4ff;
+  color: #2563eb;
+  display: grid;
+  place-items: center;
+}
+
+.preferences-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 6px 12px rgba(15, 23, 42, 0.06);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.summary-box {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f4f7f5;
+  border: 1px solid #d7e6dc;
+}
+
+.summary-box h6 {
+  font-weight: 700;
+}
+
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  background: #1f2937;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+  z-index: 50;
+}
