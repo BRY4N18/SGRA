@@ -1,0 +1,118 @@
+<section class="page-header">
+  <div>
+    <h2>
+      <span class="header-icon"><i class="bi bi-collection"></i></span>
+      Sesiones
+    </h2>
+    <p>Gestiona asistencia y cierre de sesiones de refuerzo académico.</p>
+  </div>
+</section>
+
+<div class="filters">
+  <input
+    class="form-control form-control-sm"
+    placeholder="Buscar asignatura, tema o estudiante"
+    [(ngModel)]="search"
+  />
+  <select class="form-select form-select-sm" [(ngModel)]="statusFilter">
+    <option value="">Todas</option>
+    <option value="PROGRAMADA">Programadas</option>
+    <option value="EN_CURSO">En curso</option>
+    <option value="REALIZADA">Realizadas</option>
+  </select>
+</div>
+
+<section class="session-list">
+  <article class="session-card" *ngFor="let session of filteredSessions">
+    <div class="session-info">
+      <div class="session-title">
+        <h4>{{ session.subject }}</h4>
+        <span class="status-pill" [ngClass]="session.status">{{ formatStatus(session.status) }}</span>
+      </div>
+      <small><i class="bi bi-person"></i> {{ session.student }}</small>
+      <div class="session-meta">
+        <div class="meta-item">
+          <span class="meta-label">Tema</span>
+          <span class="meta-value">{{ session.topic }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Fecha</span>
+          <span class="meta-value">{{ session.dateLabel }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Modalidad</span>
+          <span class="meta-value">{{ session.modality }}</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Tipo</span>
+          <span class="meta-value">{{ session.type === 'INDIVIDUAL' ? 'Individual' : 'Grupal' }}</span>
+        </div>
+      </div>
+      <div class="session-summary" *ngIf="session.status === 'REALIZADA'">
+        <p><strong>Estado final:</strong> {{ session.finalStatus || 'Culminada' }}</p>
+      </div>
+    </div>
+    <div class="session-actions">
+      <button
+        *ngIf="session.status !== 'REALIZADA' && !session.attendanceOpen"
+        class="btn btn-outline-primary btn-sm"
+        type="button"
+        (click)="abrirAsistencia(session)"
+      >
+        <i class="bi bi-door-open"></i>
+        Abrir registro de asistencia
+      </button>
+      <button
+        *ngIf="session.status !== 'REALIZADA' && session.attendanceOpen"
+        class="btn btn-outline-secondary btn-sm"
+        type="button"
+        (click)="cerrarAsistencia(session)"
+      >
+        <i class="bi bi-door-closed"></i>
+        Cerrar registro de asistencia
+      </button>
+      <button
+        *ngIf="session.status !== 'REALIZADA'"
+        class="btn btn-success btn-sm"
+        type="button"
+        (click)="openFinalize(session)"
+      >
+        <i class="bi bi-check2-square"></i>
+        Finalizar sesión
+      </button>
+    </div>
+  </article>
+
+  <div class="empty-state" *ngIf="!filteredSessions.length">
+    No hay sesiones para mostrar.
+  </div>
+</section>
+
+<div class="toast" *ngIf="feedbackMessage" [class.toast-success]="feedbackType === 'success'">
+  {{ feedbackMessage }}
+</div>
+
+<div class="modal-backdrop" *ngIf="selectedSession">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h4>Finalizar sesión</h4>
+      <button class="btn-close" type="button" (click)="closeFinalize()"></button>
+    </div>
+    <div class="modal-body">
+      <label class="form-label">Observaciones</label>
+      <textarea class="form-control" rows="3" [(ngModel)]="finalObservations"></textarea>
+      <label class="form-label mt-3">Resultados</label>
+      <textarea class="form-control" rows="3" [(ngModel)]="finalResults"></textarea>
+      <label class="form-label mt-3">Estado final</label>
+      <select class="form-select" [(ngModel)]="finalState">
+        <option>Culminada</option>
+        <option>Reprogramada</option>
+        <option>Cancelada</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="closeFinalize()">Cancelar</button>
+      <button class="btn btn-success btn-sm" type="button" (click)="saveFinalize()">Guardar</button>
+    </div>
+  </div>
+</div>

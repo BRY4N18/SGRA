@@ -1,81 +1,120 @@
-<div class="container-fluid p-0">
-  <div class="d-flex align-items-center justify-content-between mb-3">
-    <div>
-      <h4 class="mb-0">Panel de Coordinación</h4>
-      <small class="text-muted">Accesos rápidos</small>
-    </div>
+<section class="coordinator-hero">
+  <div>
+    <h2>Panel de Coordinación</h2>
+    <p>Sistema de Gestión de Refuerzo Académico - UTEQ</p>
   </div>
+  <button class="hero-button" type="button">
+    <i class="bi bi-download"></i>
+    Exportar Reporte
+  </button>
+</section>
 
-  <div class="row g-3">
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-            <div>
-              <h6 class="mb-1">Revisar solicitudes</h6>
-              <small class="text-muted">Validar y asignar refuerzos</small>
-            </div>
-            <i class="bi bi-clipboard-check fs-2 text-success"></i>
-          </div>
-          <button class="btn btn-success btn-sm mt-3 w-100">Abrir</button>
+<section class="kpi-grid">
+  <article class="kpi-card" *ngFor="let card of kpiCards">
+    <div class="kpi-icon" [ngClass]="card.accent">
+      <i class="bi" [ngClass]="card.icon"></i>
+    </div>
+    <div class="kpi-info">
+      <strong>{{ card.value }}</strong>
+      <span>{{ card.label }}</span>
+      <small>{{ card.helper }}</small>
+    </div>
+  </article>
+</section>
+
+<section class="summary-grid">
+  <article class="panel-card">
+    <div class="panel-title">
+      <i class="bi bi-pie-chart"></i>
+      Estado de Solicitudes
+    </div>
+    <div class="status-list">
+      <div class="status-row" *ngFor="let status of statusSummary">
+        <span class="status-label">
+          <span class="dot" [style.background]="status.color"></span>
+          {{ status.label }}
+        </span>
+        <div class="status-bar">
+          <span class="fill" [style.width.%]="status.percent" [style.background]="status.color"></span>
+        </div>
+        <span class="status-value">{{ status.value }}</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="panel-card">
+    <div class="panel-title">
+      <i class="bi bi-trophy"></i>
+      Docentes más Activos
+    </div>
+    <div class="ranking-list">
+      <div class="ranking-item" *ngFor="let teacher of topTeachers">
+        <div class="rank">{{ teacher.rank }}</div>
+        <div class="teacher-info">
+          <strong>{{ teacher.name }}</strong>
+          <small>{{ teacher.area }}</small>
+        </div>
+        <div class="teacher-metrics">
+          <span>{{ teacher.sessions }} sesiones</span>
+          <small>{{ teacher.hours }} hrs</small>
         </div>
       </div>
     </div>
+  </article>
+</section>
 
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-            <div>
-              <h6 class="mb-1">Gestión de espacios físicos</h6>
-              <small class="text-muted">Aulas / laboratorios</small>
-            </div>
-            <i class="bi bi-building fs-2 text-success"></i>
-          </div>
-          <button class="btn btn-success btn-sm mt-3 w-100">Abrir</button>
+<section class="summary-grid">
+  <article class="panel-card">
+    <div class="panel-title">
+      <i class="bi bi-building"></i>
+      Ocupación de Espacios
+      <a class="panel-link" routerLink="/dashboard/coordinador/espacios">Ver todos</a>
+    </div>
+    <div class="occupancy-list">
+      <div class="occupancy-item" *ngFor="let space of spaceOccupancy">
+        <div>
+          <strong>{{ space.name }}</strong>
+          <small>{{ space.building }}</small>
         </div>
+        <div class="occupancy-bar">
+          <span [style.width.%]="space.percent"></span>
+        </div>
+        <span class="percent">{{ space.percent }}%</span>
       </div>
     </div>
+  </article>
 
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center justify-content-between">
-            <div>
-              <h6 class="mb-1">Generación de reportes</h6>
-              <small class="text-muted">PDF / Excel</small>
-            </div>
-            <i class="bi bi-file-earmark-bar-graph fs-2 text-success"></i>
-          </div>
-          <button class="btn btn-success btn-sm mt-3 w-100">Abrir</button>
+  <article class="panel-card">
+    <div class="panel-title">
+      <i class="bi bi-book"></i>
+      Asignaturas más Solicitadas
+    </div>
+    <div class="subjects-list">
+      <div class="subject-item" *ngFor="let subject of popularSubjects">
+        <div>
+          <strong>{{ subject.name }}</strong>
+          <small>{{ subject.code }}</small>
         </div>
+        <div class="occupancy-bar">
+          <span [style.width.%]="subject.value"></span>
+        </div>
+        <span class="percent">{{ subject.value }}</span>
       </div>
     </div>
+  </article>
+</section>
 
-    <div class="col-12">
-      <div class="card shadow-sm">
-        <div class="card-body d-flex align-items-center justify-content-between">
-          <div>
-            <h6 class="mb-1">Indicadores rápidos</h6>
-            <small class="text-muted">Hoy</small>
-          </div>
-          <div class="d-flex gap-3">
-            <div class="text-center">
-              <div class="fs-4 fw-bold text-success">12</div>
-              <small class="text-muted">Solicitudes</small>
-            </div>
-            <div class="text-center">
-              <div class="fs-4 fw-bold text-success">5</div>
-              <small class="text-muted">Programadas</small>
-            </div>
-            <div class="text-center">
-              <div class="fs-4 fw-bold text-success">3</div>
-              <small class="text-muted">Pendientes</small>
-            </div>
-          </div>
-        </div>
+<section class="actions-section">
+  <h3>Acciones de Coordinación</h3>
+  <div class="actions-grid">
+    <a class="action-tile" *ngFor="let action of quickActions" [routerLink]="action.link">
+      <div class="tile-icon">
+        <i class="bi" [ngClass]="action.icon"></i>
       </div>
-    </div>
-
+      <div>
+        <strong>{{ action.label }}</strong>
+        <small>{{ action.helper }}</small>
+      </div>
+    </a>
   </div>
-</div>
+</section>

@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth/auth.service';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-teacher-layout',
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss',
+  templateUrl: './teacher-layout.component.html',
+  styleUrl: './teacher-layout.component.scss',
 })
-export class LayoutComponent {
+export class TeacherLayoutComponent {
+  username = localStorage.getItem('sgra_username') || 'Usuario';
   isSidebarCollapsed = window.innerWidth < 992;
   isRoleMenuOpen = false;
   availableRoles = this.getAvailableRoles();
@@ -42,18 +42,18 @@ export class LayoutComponent {
       STUDENT: 'Estudiante',
       TEACHER: 'Docente',
       ADMIN: 'Administrador',
-      COORDINATOR: 'Coordinación',
+      COORDINATOR: 'Coordinador',
     };
     return map[role] ?? role;
   }
 
   private getActiveRole(): string {
-    return localStorage.getItem('sgra_role') || 'COORDINATOR';
+    return localStorage.getItem('sgra_role') || 'TEACHER';
   }
 
   private getAvailableRoles(): string[] {
     const raw = localStorage.getItem('sgra_role');
-    if (!raw) return ['COORDINATOR'];
+    if (!raw) return ['TEACHER'];
 
     const trimmed = raw.trim();
     if (trimmed.startsWith('[')) {

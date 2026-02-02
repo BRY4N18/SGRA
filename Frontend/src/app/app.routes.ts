@@ -60,6 +60,59 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'dashboard/docente',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['TEACHER', 'DOCENTE'] },
+    loadComponent: () =>
+      import('./features/teacher/layout/teacher-layout.component').then(
+        m => m.TeacherLayoutComponent
+      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/teacher/pages/dashboard/teacher-dashboard.component').then(
+            m => m.TeacherDashboardComponent
+          ),
+      },
+      {
+        path: 'solicitudes',
+        loadComponent: () =>
+          import('./features/teacher/pages/solicitudes/solicitudes.component').then(
+            m => m.SolicitudesComponent
+          ),
+      },
+      {
+        path: 'disponibilidad',
+        loadComponent: () =>
+          import('./features/teacher/pages/disponibilidad/disponibilidad.component').then(
+            m => m.DisponibilidadComponent
+          ),
+      },
+      {
+        path: 'sesiones',
+        loadComponent: () =>
+          import('./features/teacher/pages/sesiones/sesiones.component').then(
+            m => m.SesionesComponent
+          ),
+      },
+      {
+        path: 'reportes',
+        loadComponent: () =>
+          import('./features/teacher/pages/reportes/reportes.component').then(
+            m => m.ReportesComponent
+          ),
+      },
+      {
+        path: 'preferencias',
+        loadComponent: () =>
+          import('./features/teacher/pages/preferencias/preferencias.component').then(
+            m => m.PreferenciasComponent
+          ),
+      },
+    ],
+  },
 
   {
     path: 'dashboard',
@@ -83,12 +136,28 @@ export const routes: Routes = [
             .then(m => m.CoordinatorDashboardComponent),
       },
       {
-        path: 'docente',
+        path: 'coordinador/espacios',
         canActivate: [roleGuard],
-        data: { roles: ['TEACHER'] },
+        data: { roles: ['COORDINATOR'] },
         loadComponent: () =>
-          import('./features/dashboards/teacherDashboard/teacherDashboard.component')
-            .then(m => m.TeacherDashboardComponent),
+          import('./features/coordinator/pages/espacios-fisicos/espacios-fisicos.component')
+            .then(m => m.EspaciosFisicosComponent),
+      },
+      {
+        path: 'coordinador/reportes',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/reportes/reportes.component')
+            .then(m => m.ReportesCoordinacionComponent),
+      },
+      {
+        path: 'coordinador/importar',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/importar-datos/importar-datos.component')
+            .then(m => m.ImportarDatosComponent),
       },
       {
         path: 'en-construccion',

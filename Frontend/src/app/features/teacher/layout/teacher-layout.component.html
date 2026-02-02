@@ -1,18 +1,18 @@
-<div class="coordinator-shell" [class.is-collapsed]="isSidebarCollapsed">
-  <aside class="coordinator-sidebar">
+<div class="teacher-shell" [class.is-collapsed]="isSidebarCollapsed">
+  <aside class="teacher-sidebar">
     <div class="sidebar-brand">
       <div class="brand-logo">
         <img src="/SGRAicono.ico" alt="SGRA" />
       </div>
       <div class="brand-text">
         <span class="brand-title">SGRA</span>
-        <span class="brand-subtitle">Refuerzo Académico</span>
+        <span class="brand-subtitle">UTEQ</span>
       </div>
     </div>
 
     <nav class="sidebar-nav">
       <a
-        routerLink="/dashboard/coordinador"
+        routerLink="/dashboard/docente"
         routerLinkActive="active"
         class="nav-item"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -22,16 +22,34 @@
         <span class="nav-label">Dashboard</span>
       </a>
       <a
-        routerLink="/dashboard/coordinador/espacios"
+        routerLink="/dashboard/docente/solicitudes"
         routerLinkActive="active"
         class="nav-item"
-        title="Gestión de Espacios Físicos"
+        title="Gestión de Solicitudes"
       >
-        <i class="bi bi-building"></i>
-        <span class="nav-label">Gestión de Espacios Físicos</span>
+        <i class="bi bi-list-check"></i>
+        <span class="nav-label">Gestión de Solicitudes</span>
       </a>
       <a
-        routerLink="/dashboard/coordinador/reportes"
+        routerLink="/dashboard/docente/disponibilidad"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Gestión de Disponibilidad"
+      >
+        <i class="bi bi-calendar2-check"></i>
+        <span class="nav-label">Gestión de Disponibilidad</span>
+      </a>
+      <a
+        routerLink="/dashboard/docente/sesiones"
+        routerLinkActive="active"
+        class="nav-item"
+        title="Sesiones"
+      >
+        <i class="bi bi-collection"></i>
+        <span class="nav-label">Sesiones</span>
+      </a>
+      <a
+        routerLink="/dashboard/docente/reportes"
         routerLinkActive="active"
         class="nav-item"
         title="Reportes"
@@ -40,13 +58,13 @@
         <span class="nav-label">Reportes</span>
       </a>
       <a
-        routerLink="/dashboard/coordinador/importar"
+        routerLink="/dashboard/docente/preferencias"
         routerLinkActive="active"
         class="nav-item"
-        title="Importar Datos"
+        title="Preferencias"
       >
-        <i class="bi bi-upload"></i>
-        <span class="nav-label">Importar Datos</span>
+        <i class="bi bi-sliders2"></i>
+        <span class="nav-label">Preferencias</span>
       </a>
     </nav>
 
@@ -56,8 +74,8 @@
     </button>
   </aside>
 
-  <section class="coordinator-main">
-    <header class="coordinator-topbar">
+  <section class="teacher-main">
+    <header class="teacher-topbar">
       <div class="topbar-title">
         <button
           class="menu-toggle"
@@ -98,13 +116,10 @@
             </button>
           </div>
         </div>
-        <button class="icon-button" type="button" aria-label="Cerrar sesión" (click)="onLogout()">
-          <i class="bi bi-box-arrow-right"></i>
-        </button>
       </div>
     </header>
 
-    <main class="coordinator-content">
+    <main class="teacher-content">
       <router-outlet></router-outlet>
     </main>
   </section>
