@@ -6,7 +6,7 @@
 }
 
 .app-sidebar{
-  background: linear-gradient(180deg, #0f5b3b 0%, #0b4028 100%);
+  background: linear-gradient(180deg, #0b5a38 0%, #0a3a25 100%);
   color: #fff;
   padding: 18px 14px;
   display: flex;
@@ -30,15 +30,15 @@
   text-decoration: none;
 }
 .menu-item i{ font-size: 18px; }
-.menu-item:hover{ background: rgba(255,255,255,.16); }
-.menu-item.active{ background: rgba(255,255,255,.22); }
+.menu-item:hover{ background: rgba(255,255,255,.14); }
+.menu-item.active{ background: rgba(255,255,255,.2); }
 
 .sidebar-footer{ margin-top: auto; padding: 10px 12px; opacity: .9; }
 
 .app-main{ display: flex; flex-direction: column; }
 .app-topbar{
   height: 64px;
-  background: #0f5b3b;
+  background: #0b5a38;
   color: #fff;
   border-bottom: 1px solid rgba(0,0,0,.1);
   display: flex;

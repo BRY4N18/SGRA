@@ -136,6 +136,30 @@ export const routes: Routes = [
             .then(m => m.CoordinatorDashboardComponent),
       },
       {
+        path: 'coordinador/espacios',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/espacios-fisicos/espacios-fisicos.component')
+            .then(m => m.EspaciosFisicosComponent),
+      },
+      {
+        path: 'coordinador/reportes',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/reportes/reportes.component')
+            .then(m => m.ReportesCoordinacionComponent),
+      },
+      {
+        path: 'coordinador/importar',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/importar-datos/importar-datos.component')
+            .then(m => m.ImportarDatosComponent),
+      },
+      {
         path: 'en-construccion',
         loadComponent: () =>
           import('./features/placeholders/en-construccion/en-construccion.component').then(
