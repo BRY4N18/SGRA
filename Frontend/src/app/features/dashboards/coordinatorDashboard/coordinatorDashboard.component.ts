@@ -6,5 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './coordinatorDashboard.html',
+  styleUrl: './coordinatorDashboard.scss',
 })
-export class CoordinatorDashboardComponent {}
+export class CoordinatorDashboardComponent {
+  username = localStorage.getItem('sgra_username') || 'Coordinador';
+}

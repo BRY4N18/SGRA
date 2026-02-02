@@ -1,0 +1,21 @@
+.dashboard-hero {
+  background: linear-gradient(90deg, #0f5b3b 0%, #0e5337 50%, #0b4028 100%);
+  padding: 22px 26px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 91, 59, 0.4);
+  box-shadow: 0 10px 22px rgba(14, 58, 35, 0.22);
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.dashboard-hero h2 {
+  margin: 0 0 6px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.dashboard-hero .subtitle {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.85;
+}

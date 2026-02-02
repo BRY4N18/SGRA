@@ -22,12 +22,19 @@
         <option *ngFor="let frecuencia of frecuencias" [value]="frecuencia">{{ frecuencia }}</option>
       </select>
     </div>
+    <div>
+      <label class="form-label">Modalidad de trabajo</label>
+      <select class="form-select" [(ngModel)]="modalidadSeleccionada">
+        <option *ngFor="let modalidad of modalidades" [value]="modalidad">{{ modalidad }}</option>
+      </select>
+    </div>
   </div>
 
   <div class="summary-box">
     <h6>Resumen</h6>
     <p>Canal principal: <strong>{{ canalSeleccionado }}</strong></p>
     <p>Frecuencia: <strong>{{ frecuenciaSeleccionada }}</strong></p>
+    <p>Modalidad de trabajo: <strong>{{ modalidadSeleccionada }}</strong></p>
     <button class="btn btn-primary btn-sm" type="button" (click)="savePreferences()">Guardar</button>
   </div>
 </section>

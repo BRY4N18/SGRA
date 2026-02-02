@@ -16,7 +16,7 @@
 }
 
 .student-sidebar {
-  background: linear-gradient(180deg, #0f8a4c 0%, #0c6a3b 100%);
+  background: linear-gradient(180deg, #0f5b3b 0%, #0b4028 100%);
   color: #fff;
   padding: 20px 18px;
   display: flex;
@@ -113,7 +113,7 @@
 
 .nav-item:hover,
 .nav-item.active {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.22);
   color: #fff;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .student-topbar {
-  background: #0f8a4c;
+  background: #0f5b3b;
   color: #fff;
   padding: 10px 20px;
   display: flex;
@@ -157,7 +157,7 @@
 }
 
 .menu-toggle {
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
   width: 34px;
@@ -188,7 +188,7 @@
   height: 32px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
   color: #fff;
   display: grid;
   place-items: center;
