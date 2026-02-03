@@ -58,7 +58,44 @@ export class TeacherMockService {
     },
   ];
 
-  private readonly sessions: TeacherSession[] = [];
+  private readonly sessions: TeacherSession[] = [
+    {
+      id: 101,
+      subject: 'Programación Avanzada',
+      topic: 'Patrones de Diseño',
+      student: 'Juan Carlos Pérez',
+      modality: 'Presencial',
+      type: 'INDIVIDUAL',
+      status: 'PROGRAMADA',
+      dateLabel: '08/01/2026 10:00',
+      attendanceOpen: false,
+    },
+    {
+      id: 102,
+      subject: 'Cálculo Diferencial',
+      topic: 'Regla de la cadena',
+      student: 'María Elena Torres',
+      modality: 'Virtual',
+      type: 'INDIVIDUAL',
+      status: 'EN_CURSO',
+      dateLabel: '09/01/2026 14:30',
+      attendanceOpen: true,
+    },
+    {
+      id: 103,
+      subject: 'Física II',
+      topic: 'Movimiento armónico',
+      student: 'Luis Vega',
+      modality: 'Presencial',
+      type: 'GRUPAL',
+      status: 'REALIZADA',
+      dateLabel: '04/01/2026 08:00',
+      attendanceOpen: false,
+      observations: 'Se revisaron ejercicios de laboratorio.',
+      results: 'Estudiantes resolvieron correctamente el 80% de la guía.',
+      finalStatus: 'Culminada',
+    },
+  ];
 
   private readonly availability: AvailabilitySlot[] = this.createAvailability();
 
@@ -66,8 +103,65 @@ export class TeacherMockService {
     return of(this.requests);
   }
 
+  getSolicitudes(): Observable<TeacherRequest[]> {
+    return this.getRequests();
+  }
+
   getSessions(): Observable<TeacherSession[]> {
     return of(this.sessions);
+  }
+
+  getSesiones(): Observable<TeacherSession[]> {
+    return this.getSessions();
+  }
+
+  aceptarSolicitud(id: number): Observable<boolean> {
+    const request = this.requests.find(item => item.id === id);
+    if (request) {
+      request.status = 'ACEPTADA';
+    }
+    return of(true);
+  }
+
+  rechazarSolicitud(id: number): Observable<boolean> {
+    const request = this.requests.find(item => item.id === id);
+    if (request) {
+      request.status = 'RECHAZADA';
+    }
+    return of(true);
+  }
+
+  abrirAsistencia(idSesion: number): Observable<boolean> {
+    const session = this.sessions.find(item => item.id === idSesion);
+    if (session) {
+      session.attendanceOpen = true;
+    }
+    return of(true);
+  }
+
+  cerrarAsistencia(idSesion: number): Observable<boolean> {
+    const session = this.sessions.find(item => item.id === idSesion);
+    if (session) {
+      session.attendanceOpen = false;
+    }
+    return of(true);
+  }
+
+  finalizarSesion(payload: {
+    idSesion: number;
+    observaciones: string;
+    resultados: string;
+    estadoFinal: string;
+  }): Observable<boolean> {
+    const session = this.sessions.find(item => item.id === payload.idSesion);
+    if (session) {
+      session.status = 'REALIZADA';
+      session.observations = payload.observaciones;
+      session.results = payload.resultados;
+      session.finalStatus = payload.estadoFinal;
+      session.attendanceOpen = false;
+    }
+    return of(true);
   }
 
   getAvailability(): Observable<AvailabilitySlot[]> {

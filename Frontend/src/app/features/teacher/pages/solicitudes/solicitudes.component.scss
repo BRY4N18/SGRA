@@ -2,13 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .page-header h2 {
   margin: 0 0 4px;
   font-weight: 600;
   font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .page-header p {
@@ -18,13 +21,18 @@
 }
 
 .header-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e8f0ff;
   color: #1d4ed8;
-  margin-right: 6px;
+  display: grid;
+  place-items: center;
 }
 
 .tabs {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   margin-bottom: 18px;
   border-bottom: 1px solid #e4e8ee;
 }
@@ -32,14 +40,14 @@
 .tab {
   border: none;
   background: none;
-  padding: 10px 12px;
+  padding: 10px 4px 12px;
   font-size: 13px;
   font-weight: 600;
   color: #5c6b64;
   border-bottom: 2px solid transparent;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .tab.active {
@@ -121,6 +129,10 @@
   gap: 6px;
 }
 
+.chip-icon {
+  font-size: 12px;
+}
+
 .card-body {
   display: grid;
   gap: 10px;
@@ -140,7 +152,8 @@
   background: #f3f4f6;
   display: grid;
   place-items: center;
-  font-size: 13px;
+  font-size: 12px;
+  color: #475467;
 }
 
 .info-row small {
@@ -161,6 +174,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+
+.card-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .empty-state {

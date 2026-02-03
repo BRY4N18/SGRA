@@ -1,6 +1,9 @@
 <section class="page-header">
   <div>
-    <h2><span class="header-icon">📋</span> Gestión de Solicitudes</h2>
+    <h2>
+      <span class="header-icon"><i class="bi bi-clipboard-check"></i></span>
+      Gestión de Solicitudes
+    </h2>
     <p>Revisa y responde las solicitudes de refuerzo académico</p>
   </div>
 </section>
@@ -13,7 +16,7 @@
     type="button"
     (click)="setTab(tab.status)"
   >
-    <span class="tab-icon">{{ tab.icon }}</span>
+    <i class="bi tab-icon" [ngClass]="tab.icon"></i>
     {{ tab.label }}
     <span class="tab-badge" *ngIf="tab.status === 'PENDIENTE'">{{ pendingCount }}</span>
   </button>
@@ -22,14 +25,14 @@
 <section class="request-grid">
   <article class="request-card" *ngFor="let request of filteredRequests">
     <div class="card-header">
-      <div class="avatar">👤</div>
+      <div class="avatar"><i class="bi bi-person-fill"></i></div>
       <div class="header-info">
         <h4>{{ request.studentName }}</h4>
         <small>{{ request.studentEmail }}</small>
       </div>
       <div class="header-meta">
         <span class="chip">
-          <span class="chip-icon">👤</span>
+          <i class="bi bi-person-badge chip-icon"></i>
           {{ request.type === 'INDIVIDUAL' ? 'Individual' : 'Grupal' }}
         </span>
         <span class="date">{{ request.dateLabel }}</span>
@@ -37,28 +40,28 @@
     </div>
     <div class="card-body">
       <div class="info-row">
-        <span class="info-icon">📘</span>
+        <span class="info-icon"><i class="bi bi-journal-bookmark-fill"></i></span>
         <div>
           <small>Asignatura</small>
           <p>{{ request.subject }}</p>
         </div>
       </div>
       <div class="info-row">
-        <span class="info-icon">📝</span>
+        <span class="info-icon"><i class="bi bi-lightbulb"></i></span>
         <div>
           <small>Tema</small>
           <p>{{ request.topic }}</p>
         </div>
       </div>
       <div class="info-row">
-        <span class="info-icon">📄</span>
+        <span class="info-icon"><i class="bi bi-card-text"></i></span>
         <div>
           <small>Motivo</small>
           <p>{{ request.reason }}</p>
         </div>
       </div>
       <div class="info-row">
-        <span class="info-icon">📍</span>
+        <span class="info-icon"><i class="bi bi-geo-alt-fill"></i></span>
         <div>
           <small>Modalidad</small>
           <p>{{ request.mode === 'PRESENCIAL' ? 'Presencial' : 'Virtual' }}</p>
@@ -67,13 +70,16 @@
     </div>
     <div class="card-actions">
       <button class="btn btn-light btn-sm" type="button" (click)="openDetail(request)">
-        👁 Ver más
+        <i class="bi bi-eye"></i>
+        Ver más
       </button>
       <button class="btn btn-danger btn-sm" type="button" (click)="reject(request)">
-        ✕ Rechazar
+        <i class="bi bi-x-lg"></i>
+        Rechazar
       </button>
       <button class="btn btn-primary btn-sm" type="button" (click)="accept(request)">
-        ✓ Aceptar
+        <i class="bi bi-check2"></i>
+        Aceptar
       </button>
     </div>
   </article>

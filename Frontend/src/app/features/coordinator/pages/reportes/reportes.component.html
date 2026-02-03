@@ -1,0 +1,94 @@
+<section class="page-header">
+  <div>
+    <h2><i class="bi bi-bar-chart"></i> Generación de Reportes</h2>
+    <p>Genera informes detallados del sistema de refuerzo académico</p>
+  </div>
+</section>
+
+<section class="reports-grid">
+  <article class="report-card" *ngFor="let card of reportCards">
+    <div class="card-header">
+      <div>
+        <h4>{{ card.title }}</h4>
+        <p>{{ card.description }}</p>
+      </div>
+      <div class="icon-badge" [ngClass]="card.accent">
+        <i class="bi" [ngClass]="card.icon"></i>
+      </div>
+    </div>
+
+    <div class="card-body" *ngIf="card.filters.length">
+      <div class="form-group" *ngFor="let filter of card.filters">
+        <label>{{ filter }}</label>
+        <select class="form-select">
+          <option *ngFor="let option of card.options">{{ option }}</option>
+        </select>
+      </div>
+      <label class="checkbox" *ngIf="card.checkboxLabel">
+        <input type="checkbox" />
+        <span>{{ card.checkboxLabel }}</span>
+      </label>
+    </div>
+
+    <div class="card-body" *ngIf="!card.filters.length">
+      <div class="custom-options">
+        <label class="checkbox"><input type="checkbox" checked /> Solicitudes</label>
+        <label class="checkbox"><input type="checkbox" checked /> Sesiones</label>
+        <label class="checkbox"><input type="checkbox" /> Asistencia</label>
+        <label class="checkbox"><input type="checkbox" /> Docentes</label>
+        <label class="checkbox"><input type="checkbox" /> Estudiantes</label>
+        <label class="checkbox"><input type="checkbox" /> Espacios</label>
+      </div>
+    </div>
+
+    <div class="card-actions">
+      <button class="btn btn-primary btn-sm" type="button">
+        <i class="bi bi-file-earmark-pdf"></i>
+        Generar PDF
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" type="button">
+        <i class="bi bi-file-earmark-excel"></i>
+        Exportar Excel
+      </button>
+    </div>
+  </article>
+</section>
+
+<section class="ai-card">
+  <div class="ai-header">
+    <h4>Recomendaciones del motor de IA</h4>
+    <p>El sistema analiza los datos del período y sugiere reportes prioritarios.</p>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-item" *ngFor="let suggestion of aiRecommendations">
+      <span>{{ suggestion }}</span>
+      <button class="btn btn-light btn-sm" type="button">Generar sugerencia</button>
+    </div>
+  </div>
+  <small class="ai-note">TODO: Conectar recomendaciones con motor de IA.</small>
+</section>
+
+<section class="table-card">
+  <h4>Reportes Generados Recientemente</h4>
+  <table class="table table-borderless align-middle">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Formato</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of recentReports">
+        <td><span class="chip">{{ report.type }}</span></td>
+        <td>{{ report.date }}</td>
+        <td><span class="format">{{ report.format }}</span></td>
+        <td class="table-actions">
+          <button class="btn btn-light btn-sm" type="button"><i class="bi bi-download"></i></button>
+          <button class="btn btn-light btn-sm text-danger" type="button"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

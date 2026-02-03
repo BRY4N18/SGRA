@@ -1,0 +1,141 @@
+<section class="page-header">
+  <div>
+    <h2><i class="bi bi-building"></i> Gestión de Espacios Físicos</h2>
+    <p>Administra aulas, laboratorios y salas para sesiones de refuerzo</p>
+  </div>
+  <button class="btn btn-primary btn-sm" type="button">
+    <i class="bi bi-plus-lg"></i>
+    Nuevo Espacio
+  </button>
+</section>
+
+<section class="kpi-grid">
+  <article class="kpi-card" *ngFor="let kpi of kpis">
+    <div class="kpi-icon">
+      <i class="bi" [ngClass]="kpi.icon"></i>
+    </div>
+    <div>
+      <strong>{{ kpi.value }}</strong>
+      <span>{{ kpi.label }}</span>
+    </div>
+  </article>
+</section>
+
+<section class="filters-card">
+  <div class="filters-grid">
+    <div class="search-field">
+      <input class="form-control" placeholder="Buscar espacio" [(ngModel)]="search" />
+      <i class="bi bi-search"></i>
+    </div>
+    <select class="form-select" [(ngModel)]="typeFilter">
+      <option>Todos</option>
+      <option>Aula</option>
+      <option>Laboratorio</option>
+      <option>Sala de Reuniones</option>
+      <option>Biblioteca</option>
+    </select>
+    <select class="form-select" [(ngModel)]="buildingFilter">
+      <option>Todos</option>
+      <option>Edificio A</option>
+      <option>Edificio B</option>
+      <option>Edificio C</option>
+      <option>Biblioteca</option>
+    </select>
+    <select class="form-select" [(ngModel)]="statusFilter">
+      <option>Todos</option>
+      <option>Disponible</option>
+      <option>En uso</option>
+    </select>
+    <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()">
+      <i class="bi bi-sliders"></i>
+      Limpiar
+    </button>
+  </div>
+</section>
+
+<div class="view-tabs">
+  <button
+    class="tab"
+    [class.active]="activeView === 'cards'"
+    type="button"
+    (click)="activeView = 'cards'"
+  >
+    <i class="bi bi-grid-3x3-gap"></i>
+    Vista de Tarjetas
+  </button>
+  <button
+    class="tab"
+    [class.active]="activeView === 'table'"
+    type="button"
+    (click)="activeView = 'table'"
+  >
+    <i class="bi bi-list-ul"></i>
+    Vista de Tabla
+  </button>
+</div>
+
+<section class="cards-grid" *ngIf="activeView === 'cards'">
+  <article class="space-card" *ngFor="let space of filteredSpaces">
+    <div class="card-header">
+      <div>
+        <span class="type-label">{{ space.type }}</span>
+        <h4>{{ space.name }}</h4>
+        <small><i class="bi bi-geo-alt"></i> {{ space.building }}</small>
+      </div>
+      <span class="status-pill" [class.in-use]="space.status === 'En uso'">{{ space.status }}</span>
+    </div>
+    <div class="card-body">
+      <p><i class="bi bi-people"></i> {{ space.capacity }} personas</p>
+      <div class="resource-chips">
+        <span class="chip" *ngFor="let resource of space.resources">{{ resource.name }}</span>
+      </div>
+      <div class="occupancy">
+        <div class="occupancy-head">
+          <span>Ocupación hoy</span>
+          <strong>{{ space.occupancy }}%</strong>
+        </div>
+        <div class="occupancy-bar">
+          <span [style.width.%]="space.occupancy"></span>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-light btn-sm" type="button"><i class="bi bi-calendar2"></i> Reservas</button>
+      <button class="btn btn-light btn-sm" type="button"><i class="bi bi-pencil"></i> Editar</button>
+      <button class="btn btn-light btn-sm text-danger" type="button"><i class="bi bi-trash"></i></button>
+    </div>
+  </article>
+</section>
+
+<section class="table-card" *ngIf="activeView === 'table'">
+  <table class="table table-borderless align-middle">
+    <thead>
+      <tr>
+        <th>Espacio</th>
+        <th>Tipo</th>
+        <th>Edificio</th>
+        <th>Capacidad</th>
+        <th>Ocupación</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let space of filteredSpaces">
+        <td>
+          <strong>{{ space.name }}</strong>
+        </td>
+        <td>{{ space.type }}</td>
+        <td>{{ space.building }}</td>
+        <td>{{ space.capacity }}</td>
+        <td>{{ space.occupancy }}%</td>
+        <td><span class="status-pill" [class.in-use]="space.status === 'En uso'">{{ space.status }}</span></td>
+        <td class="table-actions">
+          <button class="btn btn-light btn-sm" type="button"><i class="bi bi-calendar2"></i></button>
+          <button class="btn btn-light btn-sm" type="button"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-light btn-sm text-danger" type="button"><i class="bi bi-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

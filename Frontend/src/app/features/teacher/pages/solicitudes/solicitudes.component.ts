@@ -12,10 +12,10 @@ import { TeacherRequest, TeacherRequestStatus } from '../../models/teacher-reque
 })
 export class SolicitudesComponent implements OnDestroy {
   tabs: { label: string; status: TeacherRequestStatus; icon: string }[] = [
-    { label: 'Pendientes', status: 'PENDIENTE', icon: '⏳' },
-    { label: 'Aceptadas', status: 'ACEPTADA', icon: '✅' },
-    { label: 'Programadas', status: 'PROGRAMADA', icon: '📅' },
-    { label: 'Rechazadas', status: 'RECHAZADA', icon: '❌' },
+    { label: 'Pendientes', status: 'PENDIENTE', icon: 'bi-hourglass-split' },
+    { label: 'Aceptadas', status: 'ACEPTADA', icon: 'bi-check2-circle' },
+    { label: 'Programadas', status: 'PROGRAMADA', icon: 'bi-calendar-event' },
+    { label: 'Rechazadas', status: 'RECHAZADA', icon: 'bi-x-circle' },
   ];
   activeStatus: TeacherRequestStatus = 'PENDIENTE';
   requests: TeacherRequest[] = [];
@@ -25,7 +25,7 @@ export class SolicitudesComponent implements OnDestroy {
   private feedbackTimeout?: number;
 
   constructor(private teacherService: TeacherMockService) {
-    this.teacherService.getRequests().subscribe(data => (this.requests = data));
+    this.teacherService.getSolicitudes().subscribe(data => (this.requests = data));
   }
 
   get filteredRequests(): TeacherRequest[] {
@@ -45,15 +45,19 @@ export class SolicitudesComponent implements OnDestroy {
   }
 
   accept(request: TeacherRequest) {
-    request.status = 'ACEPTADA';
-    this.activeStatus = 'ACEPTADA';
-    this.showFeedback('Solicitud aceptada. Pendiente de integración con API.', 'success');
+    this.teacherService.aceptarSolicitud(request.id).subscribe(() => {
+      request.status = 'ACEPTADA';
+      this.activeStatus = 'ACEPTADA';
+      this.showFeedback('Pendiente de integración', 'success');
+    });
   }
 
   reject(request: TeacherRequest) {
-    request.status = 'RECHAZADA';
-    this.activeStatus = 'RECHAZADA';
-    this.showFeedback('Solicitud rechazada. Pendiente de integración con API.', 'danger');
+    this.teacherService.rechazarSolicitud(request.id).subscribe(() => {
+      request.status = 'RECHAZADA';
+      this.activeStatus = 'RECHAZADA';
+      this.showFeedback('Pendiente de integración', 'danger');
+    });
   }
 
   openDetail(request: TeacherRequest) {

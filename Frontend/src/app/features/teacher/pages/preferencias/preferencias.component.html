@@ -1,0 +1,42 @@
+<section class="page-header">
+  <div>
+    <h2>
+      <span class="header-icon"><i class="bi bi-sliders2"></i></span>
+      Preferencias Docente
+    </h2>
+    <p>Configura el canal principal y la frecuencia de notificaciones.</p>
+  </div>
+</section>
+
+<section class="preferences-card">
+  <div class="form-grid">
+    <div>
+      <label class="form-label">Canal principal</label>
+      <select class="form-select" [(ngModel)]="canalSeleccionado">
+        <option *ngFor="let canal of canales" [value]="canal">{{ canal }}</option>
+      </select>
+    </div>
+    <div>
+      <label class="form-label">Frecuencia</label>
+      <select class="form-select" [(ngModel)]="frecuenciaSeleccionada">
+        <option *ngFor="let frecuencia of frecuencias" [value]="frecuencia">{{ frecuencia }}</option>
+      </select>
+    </div>
+    <div>
+      <label class="form-label">Modalidad de trabajo</label>
+      <select class="form-select" [(ngModel)]="modalidadSeleccionada">
+        <option *ngFor="let modalidad of modalidades" [value]="modalidad">{{ modalidad }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <h6>Resumen</h6>
+    <p>Canal principal: <strong>{{ canalSeleccionado }}</strong></p>
+    <p>Frecuencia: <strong>{{ frecuenciaSeleccionada }}</strong></p>
+    <p>Modalidad de trabajo: <strong>{{ modalidadSeleccionada }}</strong></p>
+    <button class="btn btn-primary btn-sm" type="button" (click)="savePreferences()">Guardar</button>
+  </div>
+</section>
+
+<div class="toast" *ngIf="feedbackMessage">{{ feedbackMessage }}</div>

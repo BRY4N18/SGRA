@@ -104,6 +104,13 @@ export const routes: Routes = [
             m => m.ReportesComponent
           ),
       },
+      {
+        path: 'preferencias',
+        loadComponent: () =>
+          import('./features/teacher/pages/preferencias/preferencias.component').then(
+            m => m.PreferenciasComponent
+          ),
+      },
     ],
   },
 
@@ -127,6 +134,30 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboards/coordinatorDashboard/coordinatorDashboard.component')
             .then(m => m.CoordinatorDashboardComponent),
+      },
+      {
+        path: 'coordinador/espacios',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/espacios-fisicos/espacios-fisicos.component')
+            .then(m => m.EspaciosFisicosComponent),
+      },
+      {
+        path: 'coordinador/reportes',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/reportes/reportes.component')
+            .then(m => m.ReportesCoordinacionComponent),
+      },
+      {
+        path: 'coordinador/importar',
+        canActivate: [roleGuard],
+        data: { roles: ['COORDINATOR'] },
+        loadComponent: () =>
+          import('./features/coordinator/pages/importar-datos/importar-datos.component')
+            .then(m => m.ImportarDatosComponent),
       },
       {
         path: 'en-construccion',
