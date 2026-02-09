@@ -1,0 +1,166 @@
+<section class="wizard-header">
+  <div>
+    <h2>Nueva Solicitud de Refuerzo</h2>
+    <p>Completa el formulario por pasos para agendar tu refuerzo académico.</p>
+  </div>
+</section>
+
+<div class="wizard-steps">
+  <div class="step" [class.active]="step === 1">1. Datos principales</div>
+  <div class="step" [class.active]="step === 2">2. Tipo y horario</div>
+  <div class="step" [class.active]="step === 3">3. Confirmación</div>
+</div>
+
+<div class="wizard-card">
+  <ng-container [ngSwitch]="step">
+    <div *ngSwitchCase="1" class="step-content">
+      <h4>Datos principales</h4>
+      <div class="form-grid">
+        <div>
+          <label class="form-label">Asignatura **</label>
+          <select class="form-select form-select-sm" [(ngModel)]="subjectId">
+            <option value="">Selecciona una asignatura</option>
+            <option *ngFor="let subject of subjects" [value]="subject.code">
+              {{ subject.name }} ({{ subject.code }})
+            </option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Docente **</label>
+          <select class="form-select form-select-sm" [(ngModel)]="teacherId">
+            <option value="">Selecciona un docente</option>
+            <option *ngFor="let teacher of teachers" [value]="teacher.id">
+              {{ teacher.name }} - {{ teacher.department }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Tema</label>
+          <input class="form-control form-control-sm" placeholder="Ej: Derivadas parciales" [(ngModel)]="topic" />
+        </div>
+        <div class="span-2">
+          <label class="form-label">Motivo</label>
+          <textarea class="form-control form-control-sm" rows="4" placeholder="Describe brevemente el motivo" [(ngModel)]="reason"></textarea>
+        </div>
+        <div>
+          <label class="form-label">Adjuntar archivo (opcional)</label>
+          <input class="form-control form-control-sm" type="text" placeholder="Nombre del archivo" [(ngModel)]="attachmentName" />
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="2" class="step-content">
+      <h4>Tipo, modalidad y horario</h4>
+      <div class="form-grid">
+        <div>
+          <label class="form-label">Tipo</label>
+          <div class="chip-group">
+            <button class="chip" [class.active]="requestType === 'INDIVIDUAL'" (click)="requestType = 'INDIVIDUAL'">
+              Individual
+            </button>
+            <button class="chip" [class.active]="requestType === 'GRUPAL'" (click)="requestType = 'GRUPAL'">
+              Grupal
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Modalidad</label>
+          <div class="chip-group">
+            <button class="chip" [class.active]="modality === 'Presencial'" (click)="modality = 'Presencial'">
+              Presencial
+            </button>
+            <button class="chip" [class.active]="modality === 'Virtual'" (click)="modality = 'Virtual'">
+              Virtual
+            </button>
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Franja horaria</label>
+          <select class="form-select form-select-sm" [(ngModel)]="selectedTimeSlot">
+            <option value="">Selecciona una franja</option>
+            <option *ngFor="let slot of timeSlots" [value]="slot.id">{{ slot.label }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="groupmates" *ngIf="requestType === 'GRUPAL'">
+        <div class="groupmates-header">
+          <div>
+            <h6>Selecciona compañeros</h6>
+            <small>Seleccionados: {{ selectedGroupmates.length }}</small>
+          </div>
+          <div class="groupmates-actions">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Buscar compañero"
+              [(ngModel)]="groupmateSearch"
+            />
+            <div class="groupmates-buttons">
+              <button class="btn btn-outline-secondary btn-sm" type="button" (click)="selectAllGroupmates()">
+                Seleccionar todo
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearGroupmates()">
+                Limpiar selección
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="groupmates-list">
+          <label class="groupmate-card" *ngFor="let mate of filteredGroupmates">
+            <input type="checkbox" [checked]="selectedGroupmates.includes(mate.id)" (change)="toggleGroupmate(mate.id)" />
+            <div>
+              <strong>{{ mate.name }}</strong>
+              <small>{{ mate.career }}</small>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="3" class="step-content">
+      <h4>Confirmación</h4>
+      <div class="summary-card">
+        <div>
+          <span>Asignatura</span>
+          <strong>{{ subjectLabel }}</strong>
+        </div>
+        <div>
+          <span>Docente</span>
+          <strong>{{ teacherLabel }}</strong>
+        </div>
+        <div>
+          <span>Tema</span>
+          <strong>{{ topic || '-' }}</strong>
+        </div>
+        <div>
+          <span>Tipo</span>
+          <strong>{{ requestType || '-' }}</strong>
+        </div>
+        <div>
+          <span>Modalidad</span>
+          <strong>{{ modality || '-' }}</strong>
+        </div>
+        <div>
+          <span>Horario</span>
+          <strong>{{ timeSlotLabel }}</strong>
+        </div>
+      </div>
+
+      <button class="btn btn-success btn-sm mt-3" (click)="submit()">Enviar solicitud</button>
+      <div *ngIf="submittedMessage" class="alert alert-info mt-3">
+        {{ submittedMessage }}
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="wizard-actions">
+    <button class="btn btn-outline-secondary btn-sm" (click)="cancel()">Cancelar</button>
+    <div class="action-buttons">
+      <button class="btn btn-outline-secondary btn-sm" (click)="prevStep()" [disabled]="step === 1">Atrás</button>
+      <button class="btn btn-success btn-sm" (click)="nextStep()" [disabled]="step === 3 || (step === 1 && (!subjectId || !teacherId))">
+        Siguiente
+      </button>
+    </div>
+  </div>
+</div>

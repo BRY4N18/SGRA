@@ -1,0 +1,189 @@
+<section class="page-header">
+  <div>
+    <h2><i class="bi bi-people"></i> Gestion de usuarios</h2>
+    <p>Administra cuentas, roles y accesos del sistema.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary btn-sm" type="button" (click)="openUserModal()">
+      <i class="bi bi-person-plus"></i>
+      Nuevo usuario
+    </button>
+  </div>
+</section>
+
+<section class="kpi-grid">
+  <article class="kpi-card" *ngFor="let kpi of kpis">
+    <div class="kpi-icon">
+      <i class="bi" [ngClass]="kpi.icon"></i>
+    </div>
+    <div>
+      <strong>{{ kpi.value }}</strong>
+      <span>{{ kpi.label }}</span>
+    </div>
+  </article>
+</section>
+
+<section class="filters-card">
+  <div class="filters-grid">
+    <div class="search-field">
+      <input class="form-control" placeholder="Buscar usuario" [(ngModel)]="search" />
+      <i class="bi bi-search"></i>
+    </div>
+    <select class="form-select" [(ngModel)]="roleFilter">
+      <option *ngFor="let role of roleOptions" [value]="role">{{ role }}</option>
+    </select>
+    <select class="form-select" [(ngModel)]="statusFilter">
+      <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+    </select>
+    <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()">
+      <i class="bi bi-sliders"></i>
+      Limpiar
+    </button>
+  </div>
+</section>
+
+<section>
+  <div class="table-card">
+    <table class="table table-borderless align-middle">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th>Contacto</th>
+          <th>Genero / Institucion</th>
+          <th>Acceso</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>
+            <strong>{{ user.fullName }}</strong>
+            <small>ID: {{ user.identifier }}</small>
+          </td>
+          <td>
+            <span>{{ user.email }}</span>
+            <small>{{ user.phone }} - {{ user.address }}</small>
+          </td>
+          <td>
+            <span>{{ user.gender }}</span>
+            <small>{{ user.institution }}</small>
+          </td>
+          <td>
+            <span class="pill">{{ user.role }}</span>
+            <small>{{ '@' + user.username }}</small>
+            <span class="status-pill" [class.blocked]="user.accountStatus === 'Bloqueada'">
+              {{ user.accountStatus }}
+            </span>
+          </td>
+          <td>
+            <span class="status-pill" [class.inactive]="user.status === 'Inactivo'">
+              {{ user.status }}
+            </span>
+          </td>
+          <td class="table-actions">
+            <button class="btn btn-light btn-sm" type="button" title="Editar">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-light btn-sm" type="button" title="Reset">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+            <button class="btn btn-light btn-sm text-danger" type="button" title="Eliminar">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-footer">
+      <span>Mostrando {{ filteredUsers.length }} usuarios</span>
+      <div class="pagination">
+        <button class="btn btn-outline-secondary btn-sm" type="button">Anterior</button>
+        <button class="btn btn-outline-secondary btn-sm" type="button">Siguiente</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showUserModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div>
+        <h4>Nuevo usuario</h4>
+        <small>Completa la informacion base y crea el acceso.</small>
+      </div>
+      <button class="btn btn-light btn-sm" type="button" (click)="closeUserModal()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label class="form-label">Nombres</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.nombres" placeholder="Nombres" />
+      </div>
+      <div>
+        <label class="form-label">Apellidos</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.apellidos" placeholder="Apellidos" />
+      </div>
+      <div>
+        <label class="form-label">Identificador</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.identificador" placeholder="Cedula o ID" />
+      </div>
+      <div>
+        <label class="form-label">Correo</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.correo" placeholder="correo@uteq.edu.ec" />
+      </div>
+      <div>
+        <label class="form-label">Telefono</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.telefono" placeholder="0999999999" />
+      </div>
+      <div>
+        <label class="form-label">Genero</label>
+        <select class="form-select form-select-sm" [(ngModel)]="form.genero">
+          <option value="">Selecciona un genero</option>
+          <option *ngFor="let genero of genderOptions" [value]="genero">{{ genero }}</option>
+        </select>
+      </div>
+      <div class="span-2">
+        <label class="form-label">Direccion</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.direccion" placeholder="Direccion" />
+      </div>
+      <div>
+        <label class="form-label">Institucion</label>
+        <select class="form-select form-select-sm" [(ngModel)]="form.institucion">
+          <option value="">Selecciona una institucion</option>
+          <option *ngFor="let institucion of institutionOptions" [value]="institucion">
+            {{ institucion }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">Rol</label>
+        <select class="form-select form-select-sm" [(ngModel)]="form.rol">
+          <option value="">Selecciona un rol</option>
+          <option *ngFor="let role of roleOptions" [value]="role" [disabled]="role === 'Todos'">
+            {{ role }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">Usuario</label>
+        <input class="form-control form-control-sm" [(ngModel)]="form.usuario" placeholder="usuario" />
+      </div>
+      <div class="form-check form-switch span-2">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="form.cuentaActiva" />
+        <label class="form-check-label">Cuenta activa</label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm" type="button">
+        <i class="bi bi-save"></i>
+        Guardar usuario
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" type="button" (click)="closeUserModal()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+

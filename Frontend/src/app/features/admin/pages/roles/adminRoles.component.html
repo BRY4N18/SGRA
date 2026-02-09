@@ -1,0 +1,129 @@
+<section class="page-header">
+  <div>
+    <h2><i class="bi bi-shield-lock"></i> Gestion de roles</h2>
+    <p>Define alcance y estado de cada rol del sistema.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary btn-sm" type="button">
+      <i class="bi bi-plus-lg"></i>
+      Nuevo rol
+    </button>
+  </div>
+</section>
+
+<section class="kpi-grid">
+  <article class="kpi-card" *ngFor="let kpi of kpis">
+    <div class="kpi-icon">
+      <i class="bi" [ngClass]="kpi.icon"></i>
+    </div>
+    <div>
+      <strong>{{ kpi.value }}</strong>
+      <span>{{ kpi.label }}</span>
+    </div>
+  </article>
+</section>
+
+<section class="roles-grid">
+  <article
+    class="role-card"
+    *ngFor="let role of roles"
+    [class.active]="role.id === selectedRole.id"
+    (click)="selectRole(role)"
+  >
+    <div class="role-header">
+      <div>
+        <h4>{{ role.name }}</h4>
+      </div>
+      <span class="status-pill" [class.inactive]="role.status === 'Inactivo'">
+        {{ role.status }}
+      </span>
+    </div>
+    <p>{{ role.description }}</p>
+    <div class="role-meta">
+      <span><i class="bi bi-people"></i> {{ role.users }} usuarios</span>
+      <span><i class="bi bi-grid-3x3-gap"></i> {{ role.modules }} modulos</span>
+    </div>
+    <button class="btn btn-light btn-sm" type="button" (click)="openRoleModal(role); $event.stopPropagation()">
+      Ver detalle
+    </button>
+    <small>Actualizado: {{ role.updated }}</small>
+  </article>
+</section>
+
+<section class="create-role">
+  <div class="detail-card">
+    <div class="detail-header">
+      <h4>Crear rol</h4>
+      <span class="tag">Nuevo</span>
+    </div>
+    <div class="form-grid">
+      <div>
+        <label class="form-label">Nombre del rol</label>
+        <input class="form-control form-control-sm" [(ngModel)]="newRole.name" placeholder="Nombre" />
+      </div>
+      <div>
+        <label class="form-label">Descripcion</label>
+        <textarea class="form-control form-control-sm" rows="3" [(ngModel)]="newRole.description"></textarea>
+      </div>
+      <div>
+        <label class="form-label">Estado</label>
+        <select class="form-select form-select-sm" [(ngModel)]="newRole.status">
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="detail-actions">
+      <button class="btn btn-primary btn-sm" type="button">
+        Guardar rol
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" type="button">
+        Limpiar
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="showRoleModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <div>
+        <h4>Detalle del rol</h4>
+        <small>Resumen de permisos y estado actual.</small>
+      </div>
+      <button class="btn btn-light btn-sm" type="button" (click)="closeRoleModal()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="detail-list">
+      <div>
+        <span>Nombre</span>
+        <strong>{{ selectedRole.name }}</strong>
+      </div>
+      <div>
+        <span>Usuarios</span>
+        <strong>{{ selectedRole.users }}</strong>
+      </div>
+      <div>
+        <span>Modulos</span>
+        <strong>{{ selectedRole.modules }}</strong>
+      </div>
+      <div>
+        <span>Estado</span>
+        <strong>{{ selectedRole.status }}</strong>
+      </div>
+      <div>
+        <span>Actualizacion</span>
+        <strong>{{ selectedRole.updated }}</strong>
+      </div>
+    </div>
+    <div class="detail-actions">
+      <button class="btn btn-primary btn-sm" type="button">
+        Asignar permisos
+      </button>
+      <button class="btn btn-outline-secondary btn-sm" type="button">
+        Ver usuarios
+      </button>
+    </div>
+  </div>
+</div>
