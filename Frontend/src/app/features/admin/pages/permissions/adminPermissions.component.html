@@ -1,0 +1,66 @@
+<section class="page-header">
+  <div>
+    <h2><i class="bi bi-key"></i> Permisos por modulo</h2>
+    <p>Configura el acceso de cada rol en los modulos del sistema.</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-primary btn-sm" type="button">
+      <i class="bi bi-save"></i>
+      Guardar cambios
+    </button>
+    <button class="btn btn-outline-secondary btn-sm" type="button">
+      Restablecer
+    </button>
+  </div>
+</section>
+
+<section class="role-toolbar">
+  <div class="role-select">
+    <label class="form-label">Rol activo</label>
+    <select class="form-select" [(ngModel)]="selectedRole">
+      <option *ngFor="let role of roleOptions" [value]="role.key">{{ role.label }}</option>
+    </select>
+  </div>
+  <div class="role-summary">
+    <div class="summary-card">
+      <strong>{{ enabledModules }}</strong>
+      <span>Modulos habilitados</span>
+    </div>
+    <div class="summary-card">
+      <strong>{{ fullAccessModules }}</strong>
+      <span>Acceso total</span>
+    </div>
+    <div class="summary-card">
+      <strong>{{ readOnlyModules }}</strong>
+      <span>Solo lectura</span>
+    </div>
+  </div>
+  <div class="role-highlight">
+    <span class="badge">Rol: {{ selectedRoleLabel }}</span>
+    <small>Permisos editables por modulo</small>
+  </div>
+</section>
+
+<section class="permissions-list">
+  <article class="module-card" *ngFor="let module of modules">
+    <div class="module-header">
+      <div class="module-title">
+        <span class="module-icon"><i class="bi" [ngClass]="module.icon"></i></span>
+        <div>
+          <h4>{{ module.name }}</h4>
+          <p>{{ module.description }}</p>
+        </div>
+      </div>
+      <span class="module-tag">{{ module.category }}</span>
+    </div>
+    <div class="permissions-grid">
+      <label class="permission-pill" *ngFor="let action of permissionActions">
+        <input
+          type="checkbox"
+          [(ngModel)]="permissionMatrix[selectedRole][module.key][action.key]"
+        />
+        <span><i class="bi" [ngClass]="action.icon"></i> {{ action.label }}</span>
+      </label>
+    </div>
+  </article>
+</section>

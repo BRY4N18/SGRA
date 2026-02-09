@@ -1,0 +1,72 @@
+<section class="hero-card">
+  <div class="hero-text">
+    <span class="hero-tag">Panel Administrador</span>
+    <h2>Hola, {{ username }}</h2>
+    <p>Gestiona usuarios, roles y permisos del sistema SGRA.</p>
+  </div>
+  <div class="hero-actions">
+    <a class="btn btn-light btn-sm" routerLink="/dashboard/admin/usuarios">
+      <i class="bi bi-person-plus"></i>
+      Nuevo usuario
+    </a>
+    <a class="btn btn-outline-light btn-sm" routerLink="/dashboard/admin/permisos">
+      <i class="bi bi-key"></i>
+      Configurar permisos
+    </a>
+  </div>
+</section>
+
+<section class="metrics-grid">
+  <article class="metric-card" *ngFor="let metric of metrics">
+    <div class="metric-icon" [ngClass]="metric.accent">
+      <i class="bi" [ngClass]="metric.icon"></i>
+    </div>
+    <div>
+      <h3>{{ metric.value }}</h3>
+      <span>{{ metric.label }}</span>
+    </div>
+  </article>
+</section>
+
+<section class="dashboard-grid">
+  <div class="panel-card">
+    <div class="panel-header">
+      <div class="panel-title">
+        <span class="panel-icon"><i class="bi bi-activity"></i></span>
+        <h4>Auditoria reciente</h4>
+      </div>
+    </div>
+    <div class="panel-list">
+      <div class="panel-item" *ngFor="let audit of auditTrail">
+        <div class="panel-content">
+          <strong>{{ audit.title }}</strong>
+          <small>{{ audit.meta }}</small>
+        </div>
+        <span class="chip chip-muted">{{ audit.status }}</span>
+      </div>
+    </div>
+    <a class="panel-link" routerLink="/dashboard/admin/roles">Ver historial</a>
+  </div>
+</section>
+
+<section class="actions-section">
+  <h4>Acciones rapidas</h4>
+  <div class="actions-grid">
+    <a class="action-card" routerLink="/dashboard/admin/usuarios">
+      <span class="action-icon"><i class="bi bi-people"></i></span>
+      <span>Gestion de usuarios</span>
+    </a>
+    <a class="action-card" routerLink="/dashboard/admin/roles">
+      <span class="action-icon"><i class="bi bi-shield-lock"></i></span>
+      <span>Roles y niveles</span>
+    </a>
+    <a class="action-card" routerLink="/dashboard/admin/permisos">
+      <span class="action-icon"><i class="bi bi-key"></i></span>
+      <span>Permisos por modulo</span>
+    </a>
+    <a class="action-card" routerLink="/dashboard/admin/usuarios">
+      <span class="action-icon"><i class="bi bi-person-check"></i></span>
+      <span>Activar accesos</span>
+    </a>
+  </div>
+</section>

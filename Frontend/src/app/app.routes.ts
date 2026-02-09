@@ -10,11 +10,54 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   {
+    path: 'dashboard/admin',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['ADMIN'] },
+    loadComponent: () =>
+      import('./features/admin/layout/adminLayout.component').then(
+        m => m.AdminLayoutComponent
+      ),
+    children: [
+      {
+        path: '',
+        data: { title: 'Dashboard Administrador' },
+        loadComponent: () =>
+          import('./features/admin/pages/dashboard/adminDashboard.component').then(
+            m => m.AdminDashboardPageComponent
+          ),
+      },
+      {
+        path: 'usuarios',
+        data: { title: 'Gestion de Usuarios' },
+        loadComponent: () =>
+          import('./features/admin/pages/users/adminUsers.component').then(
+            m => m.AdminUsuariosComponent
+          ),
+      },
+      {
+        path: 'roles',
+        data: { title: 'Gestion de Roles' },
+        loadComponent: () =>
+          import('./features/admin/pages/roles/adminRoles.component').then(
+            m => m.AdminRolesComponent
+          ),
+      },
+      {
+        path: 'permisos',
+        data: { title: 'Permisos por Modulo' },
+        loadComponent: () =>
+          import('./features/admin/pages/permissions/adminPermissions.component').then(
+            m => m.AdminPermisosComponent
+          ),
+      },
+    ],
+  },
+  {
     path: 'dashboard/estudiante',
     canActivate: [authGuard, roleGuard],
     data: { roles: ['STUDENT'] },
     loadComponent: () =>
-      import('./features/student/layout/student-layout.component').then(
+      import('./features/student/layout/studentLayout.component').then(
         m => m.StudentLayoutComponent
       ),
     children: [
@@ -22,7 +65,7 @@ export const routes: Routes = [
         path: '',
         data: { title: 'Dashboard Estudiante' },
         loadComponent: () =>
-          import('./features/student/pages/dashboard/student-dashboard.component').then(
+          import('./features/student/pages/dashboard/studentDashboard.component').then(
             m => m.StudentDashboardPageComponent
           ),
       },
@@ -30,7 +73,7 @@ export const routes: Routes = [
         path: 'mis-solicitudes',
         data: { title: 'Mis Solicitudes' },
         loadComponent: () =>
-          import('./features/student/pages/mis-solicitudes/mis-solicitudes.component').then(
+          import('./features/student/pages/myRequests/myRequests.component').then(
             m => m.MisSolicitudesComponent
           ),
       },
@@ -38,7 +81,7 @@ export const routes: Routes = [
         path: 'nueva-solicitud',
         data: { title: 'Nueva Solicitud de Refuerzo' },
         loadComponent: () =>
-          import('./features/student/pages/nueva-solicitud/nueva-solicitud.component').then(
+          import('./features/student/pages/newRequest/newRequest.component').then(
             m => m.NuevaSolicitudComponent
           ),
       },
@@ -46,7 +89,7 @@ export const routes: Routes = [
         path: 'historial',
         data: { title: 'Historial' },
         loadComponent: () =>
-          import('./features/student/pages/historial/historial.component').then(
+          import('./features/student/pages/history/history.component').then(
             m => m.HistorialComponent
           ),
       },
@@ -54,7 +97,7 @@ export const routes: Routes = [
         path: 'preferencias',
         data: { title: 'Preferencias' },
         loadComponent: () =>
-          import('./features/student/pages/preferencias/preferencias.component').then(
+          import('./features/student/pages/preferences/preferences.component').then(
             m => m.PreferenciasComponent
           ),
       },
@@ -65,49 +108,49 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { roles: ['TEACHER', 'DOCENTE'] },
     loadComponent: () =>
-      import('./features/teacher/layout/teacher-layout.component').then(
+      import('./features/teacher/layout/teacherLayout.component').then(
         m => m.TeacherLayoutComponent
       ),
     children: [
       {
         path: '',
         loadComponent: () =>
-          import('./features/teacher/pages/dashboard/teacher-dashboard.component').then(
+          import('./features/teacher/pages/dashboard/teacherDashboard.component').then(
             m => m.TeacherDashboardComponent
           ),
       },
       {
         path: 'solicitudes',
         loadComponent: () =>
-          import('./features/teacher/pages/solicitudes/solicitudes.component').then(
+          import('./features/teacher/pages/requests/requests.component').then(
             m => m.SolicitudesComponent
           ),
       },
       {
         path: 'disponibilidad',
         loadComponent: () =>
-          import('./features/teacher/pages/disponibilidad/disponibilidad.component').then(
+          import('./features/teacher/pages/availability/availability.component').then(
             m => m.DisponibilidadComponent
           ),
       },
       {
         path: 'sesiones',
         loadComponent: () =>
-          import('./features/teacher/pages/sesiones/sesiones.component').then(
+          import('./features/teacher/pages/sessions/sessions.component').then(
             m => m.SesionesComponent
           ),
       },
       {
         path: 'reportes',
         loadComponent: () =>
-          import('./features/teacher/pages/reportes/reportes.component').then(
+          import('./features/teacher/pages/reports/reports.component').then(
             m => m.ReportesComponent
           ),
       },
       {
         path: 'preferencias',
         loadComponent: () =>
-          import('./features/teacher/pages/preferencias/preferencias.component').then(
+          import('./features/teacher/pages/preferences/preferences.component').then(
             m => m.PreferenciasComponent
           ),
       },
@@ -119,14 +162,6 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      {
-        path: 'admin',
-        canActivate: [roleGuard],
-        data: { roles: ['ADMIN'] },
-        loadComponent: () =>
-          import('./features/dashboards/adminDashboard/adminDashboard.component')
-            .then(m => m.AdminDashboardComponent),
-      },
       {
         path: 'coordinador',
         canActivate: [roleGuard],
@@ -140,7 +175,7 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['COORDINATOR'] },
         loadComponent: () =>
-          import('./features/coordinator/pages/espacios-fisicos/espacios-fisicos.component')
+          import('./features/coordinator/pages/physicalSpaces/physicalSpaces.component')
             .then(m => m.EspaciosFisicosComponent),
       },
       {
@@ -148,7 +183,7 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['COORDINATOR'] },
         loadComponent: () =>
-          import('./features/coordinator/pages/reportes/reportes.component')
+          import('./features/coordinator/pages/reports/reports.component')
             .then(m => m.ReportesCoordinacionComponent),
       },
       {
@@ -156,13 +191,13 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['COORDINATOR'] },
         loadComponent: () =>
-          import('./features/coordinator/pages/importar-datos/importar-datos.component')
+          import('./features/coordinator/pages/importData/importData.component')
             .then(m => m.ImportarDatosComponent),
       },
       {
         path: 'en-construccion',
         loadComponent: () =>
-          import('./features/placeholders/en-construccion/en-construccion.component').then(
+          import('./features/placeholders/underConstruction/underConstruction.component').then(
             m => m.EnConstruccionComponent
           ),
       },
@@ -174,3 +209,4 @@ export const routes: Routes = [
 
   { path: '**', redirectTo: 'login' },
 ];
+

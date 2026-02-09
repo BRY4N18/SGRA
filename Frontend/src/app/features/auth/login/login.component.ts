@@ -31,7 +31,7 @@ export class LoginComponent {
     this.auth.login(this.user.trim(), this.pass).subscribe({
       next: (res) => {
         const map: Record<Role, string> = {
-          ADMIN: '/dashboard/en-construccion',
+          ADMIN: '/dashboard/admin',
           COORDINATOR: '/dashboard/en-construccion',
           TEACHER: '/dashboard/docente',
           STUDENT: '/dashboard/estudiante',

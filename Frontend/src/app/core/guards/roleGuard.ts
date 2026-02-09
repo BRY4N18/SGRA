@@ -17,7 +17,7 @@ export const roleGuard: CanActivateFn = (route) => {
   const redirectMap: Record<string, string> = {
     TEACHER: '/dashboard/docente',
     STUDENT: '/dashboard/estudiante',
-    ADMIN: '/dashboard/en-construccion',
+    ADMIN: '/dashboard/admin',
     COORDINATOR: '/dashboard/en-construccion',
   };
 

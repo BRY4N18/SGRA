@@ -1,0 +1,265 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-header h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #5c6b64;
+  font-size: 13px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.kpi-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e6ecea;
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
+}
+
+.kpi-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #eef2ff;
+  color: #3730a3;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.kpi-card strong {
+  display: block;
+  font-size: 20px;
+}
+
+.kpi-card span {
+  font-size: 12px;
+  color: #6b7a72;
+}
+
+.filters-card {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e6ecea;
+  padding: 14px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.04);
+  margin-bottom: 16px;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(2, minmax(140px, 1fr)) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-field {
+  position: relative;
+}
+
+.search-field i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9aa6a1;
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e6ecea;
+  padding: 12px;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
+}
+
+.table-card table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-card table th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #64748b;
+}
+
+.table-card table td,
+.table-card table th {
+  word-break: break-word;
+  white-space: normal;
+  vertical-align: top;
+}
+
+.table-card table small {
+  display: block;
+  color: #6b7a72;
+  font-size: 11px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #e6ecea;
+  font-size: 12px;
+  color: #6b7a72;
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.pill {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.status-pill {
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.status-pill.inactive {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-pill.blocked {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.muted {
+  color: #94a3b8;
+  font-size: 11px;
+  display: block;
+}
+
+.form-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.form-grid .span-2 {
+  grid-column: 1 / -1;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  width: 100%;
+  max-width: 720px;
+  border: 1px solid #e3ebe6;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+  display: grid;
+  gap: 12px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.modal-header small {
+  display: block;
+  font-size: 12px;
+  color: #6b7a72;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
