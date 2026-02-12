@@ -1,5 +1,6 @@
 package com.LMTZ.backend.entities;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -23,6 +24,12 @@ public class RoleManagement {
 
     @Column(name = "grol",length = 100, nullable = false)
     private String roleG;
+
+    @Column(name = "descripcion", nullable = false, columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "fechahoracreacion", nullable = false, columnDefinition = "timestamp default CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
 
     @Column(name = "estado", nullable = false, columnDefinition = "boolean default true")
     private Boolean state = true;
