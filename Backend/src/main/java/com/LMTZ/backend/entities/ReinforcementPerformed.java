@@ -31,7 +31,7 @@ public class ReinforcementPerformed {
     @Column(name = "duracion", nullable = false, columnDefinition = "time")
     private Time duration;
     
-    @Column(name = "estado",nullable = false, columnDefinition = "char(1) default 'R' check (Estado in ('R', 'C'))")
+    @Column(name = "estado",nullable = false, columnDefinition = "char(1) default 'R' check (estado in ('R', 'C'))")
     private Character state;
 
     @OneToMany(mappedBy = "reinforcementPerformedId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

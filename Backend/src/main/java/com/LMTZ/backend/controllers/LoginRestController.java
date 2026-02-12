@@ -11,16 +11,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/SGRA")
 @SessionAttributes("dateUser")
 public class LoginRestController {
+
     private final IUserService userSer;
 
     @PostMapping("/login")
@@ -28,7 +28,7 @@ public class LoginRestController {
         @RequestBody LoginRequestDTO loginRequest,
         HttpServletRequest request,
         HttpSession session,
-        org.springframework.ui.Model model
+        Model model
     ) {
         
         String email = loginRequest.getEmail();
@@ -44,5 +44,4 @@ public class LoginRestController {
 
         return answerDto;
     }
-    
 }

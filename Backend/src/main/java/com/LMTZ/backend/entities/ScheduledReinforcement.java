@@ -34,10 +34,6 @@ public class ScheduledReinforcement {
     @JoinColumn(name = "idfranjahorario", foreignKey = @ForeignKey(name = "fk_refuerzoprog_franja"))
     private TimeSlot timeSlotId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idplataformavirtual", foreignKey = @ForeignKey(name = "fk_refuerzoprog_plataforma"))
-    private VirtualPlatform virtualPlatformId;
-
     @Column(name = "tiempoestimado", nullable = false, columnDefinition = "time")
     private LocalTime estimatedTime;
     
@@ -47,8 +43,8 @@ public class ScheduledReinforcement {
     @Column (name = "fechacreacion",nullable = false, columnDefinition = "timestamp")
     private LocalDateTime newSchedule;
 
-    @Column(name = "estado", length = 2, nullable = false, columnDefinition = "char(2) default 'P' check (Estado in ('P','RP','R'))")
-    private String status = "P";
+    @Column(name = "estado", nullable = false, columnDefinition = "char(2) default 'P' check(estado in ('P', 'RP', 'R'))")
+    private String state;
 
     @OneToMany(mappedBy = "scheduledReinforcementId", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduledReinforcementDetail> scheduledReinforcementDetails;

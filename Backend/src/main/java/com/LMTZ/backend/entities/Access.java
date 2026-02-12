@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "tbaccesos", schema = "sgra")
+@Table(name = "tbaccesos")
 public class Access {
     @Id
     @Column(name = "idaccesso")
@@ -37,4 +37,7 @@ public class Access {
 
     @Column(name = "contrasena", nullable = false, columnDefinition = "TEXT")
     private String password;
+
+    @Column(name = "cuenta_activa", nullable = false, columnDefinition = "boolean default true")
+    private Boolean state = true;
 }

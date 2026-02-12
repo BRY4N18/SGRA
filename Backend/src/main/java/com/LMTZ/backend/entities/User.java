@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tbusuarios", schema = "sgra")
+@Table(name = "tbusuarios")
 public class User {
     @Id
     @Column(name = "idusuario")
@@ -45,6 +45,9 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Access access;
+
+    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private UserManagement userManagement;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<UsersRoles> usersRoles;
