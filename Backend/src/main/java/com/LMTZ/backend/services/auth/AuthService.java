@@ -2,8 +2,8 @@ package com.LMTZ.backend.services.auth;
 
 import java.util.Locale;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,17 +22,14 @@ public class AuthService {
 
     private final IAccessRepository accessRepository;
     private final IUserRoleRepository userRoleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     @Transactional(readOnly = true)
     public AuthLoginResponse login(AuthLoginRequest request) {
 
-        // Si quieres hacerlo case-insensitive, cambia tu repo a findByUsernameIgnoreCase.
         Access access = accessRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new BadCredentialsException("Credenciales inválidas"));
 
-        // uenta_activa viene como access.state -> getState()
         Boolean activa = access.getState();
         if (activa != null && !activa) {
             throw new AccountInactiveException("Cuenta inactiva. Contacta al administrador.");
@@ -53,16 +50,11 @@ public class AuthService {
     private boolean passwordMatches(String storedPassword, String rawPassword) {
         if (storedPassword == null || rawPassword == null) return false;
 
-        if (isBcryptHash(storedPassword)) {
-            return passwordEncoder.matches(rawPassword, storedPassword);
+        if (storedPassword.startsWith("$2a$") || storedPassword.startsWith("$2b$") || storedPassword.startsWith("$2y$")) {
+            return BCrypt.checkpw(rawPassword, storedPassword);
         }
 
-        // Temporal: texto plano para pruebas
         return storedPassword.equals(rawPassword);
-    }
-
-    private boolean isBcryptHash(String password) {
-        return password.startsWith("$2a$") || password.startsWith("$2b$") || password.startsWith("$2y$");
     }
 
     private String resolveRole(Integer userId) {
