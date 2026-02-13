@@ -33,7 +33,7 @@ export class AdminDashboardPageComponent implements OnInit {
     this.adminService.getDashboardStats().subscribe({
       next: (data: AdministrationDashboard) => {
         this.metrics = [
-          { label: 'Usuarios activos', value: 128, icon: 'bi-people', accent: 'metric-icon--blue' },
+          { label: 'Usuarios activos', value: data.inactiveAccounts, icon: 'bi-people', accent: 'metric-icon--blue' },
           { label: 'Roles vigentes', value: data.assetRoles, icon: 'bi-shield-check', accent: 'metric-icon--purple' },
           { label: 'Modulos con permiso', value: data.modulesWithPermissions, icon: 'bi-grid-3x3-gap', accent: 'metric-icon--green' },
           { label: 'Cuentas inactivas', value: data.inactiveAccounts, icon: 'bi-person-x', accent: 'metric-icon--orange' },
@@ -41,7 +41,6 @@ export class AdminDashboardPageComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al obtener las estadísticas del dashboard', err);
-        // Mantener métricas por defecto en caso de error
       }
     });
   }

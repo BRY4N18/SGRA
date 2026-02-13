@@ -1,6 +1,7 @@
 package com.LMTZ.backend.services.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,20 @@ public class GRoleServiceImpl implements IGRoleService{
     private final IUserManagementRepository userManagementRepo;
     //private final IModuleManagementRepository moduleManagementRepo;
 
+    @Override
     public AdministrationDashboardDTO getAdministrationDashboardDTO(){
         AdministrationDashboardDTO adminDashDto = new AdministrationDashboardDTO();
         adminDashDto.setAssetRoles(roleManagementRepo.countByStateTrue());
         adminDashDto.setInactiveAccounts(userManagementRepo.countByStateFalse());
         //adminDashDto.setModulesWithPermissions(moduleManagementRepo);
+        adminDashDto.setModulesWithPermissions(0L);
         return adminDashDto;
     }
 
-    public List<RoleDTO> getActiveRoles(){
-        return roleManagementRepo.findByStateTrue().orElse(null);
-    }
+    @Override
+    public List<RoleDTO> getActiveRoles() {
+    return roleManagementRepo.findByStateTrue().stream()
+        .map(role -> new RoleDTO(role.getRoleId(), role.getRole())) 
+        .collect(Collectors.toList());
+}
 }
