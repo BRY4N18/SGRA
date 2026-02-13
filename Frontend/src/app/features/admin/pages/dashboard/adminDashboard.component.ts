@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AdminService } from '../../services/adminservice';
@@ -13,12 +13,17 @@ import { AdminAudit } from '../../modelos/AdminAudit';
   templateUrl: './adminDashboard.component.html',
   styleUrl: './adminDashboard.component.scss',
 })
-export class AdminDashboardPageComponent {
+export class AdminDashboardPageComponent implements OnInit {
   username = localStorage.getItem('sgra_username') || 'Administrador';
 
   private adminService = inject(AdminService);
 
-  metrics: AdminMetric[] = [];
+  metrics: AdminMetric[] = [
+    { label: 'Usuarios activos', value: 0, icon: 'bi-people', accent: 'metric-icon--blue' },
+    { label: 'Roles vigentes', value: 0, icon: 'bi-shield-check', accent: 'metric-icon--purple' },
+    { label: 'Modulos con permiso', value: 0, icon: 'bi-grid-3x3-gap', accent: 'metric-icon--green' },
+    { label: 'Cuentas inactivas', value: 0, icon: 'bi-person-x', accent: 'metric-icon--orange' },
+  ];
 
   ngOnInit(): void {
     this.loadDashboardStats();
@@ -36,6 +41,7 @@ export class AdminDashboardPageComponent {
       },
       error: (err) => {
         console.error('Error al obtener las estadísticas del dashboard', err);
+        // Mantener métricas por defecto en caso de error
       }
     });
   }

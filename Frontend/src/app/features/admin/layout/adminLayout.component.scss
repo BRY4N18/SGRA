@@ -137,6 +137,7 @@
 .admin-main {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .admin-topbar {
@@ -262,6 +263,8 @@
 
 .admin-content {
   padding: 22px;
+  flex: 1;
+  overflow: auto;
 }
 
 @media (max-width: 992px) {

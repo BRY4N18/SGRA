@@ -18,7 +18,7 @@
   <div class="role-select">
     <label class="form-label">Rol activo</label>
     <select class="form-select" [(ngModel)]="selectedRole">
-      <option *ngFor="let role of roleOptions" [value]="role.key">{{ role.label }}</option>
+      <option *ngFor="let role of roleOptions" [value]="role.roleId">{{ role.role }}</option>
     </select>
   </div>
   <div class="role-summary">
