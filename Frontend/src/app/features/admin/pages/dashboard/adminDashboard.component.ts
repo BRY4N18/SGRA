@@ -1,19 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
-interface AdminMetric {
-  label: string;
-  value: number;
-  icon: string;
-  accent: string;
-}
-
-interface AdminAudit {
-  title: string;
-  meta: string;
-  status: string;
-}
+import { AdminService } from '../../services/adminservice';
+import { AdministrationDashboard } from '../../modelos/AdministrationDashboard';
+import { AdminMetric } from '../../modelos/AdminMetric';
+import { AdminAudit } from '../../modelos/AdminAudit';
 
 @Component({
   selector: 'app-admin-dashboard-page',
@@ -25,12 +16,29 @@ interface AdminAudit {
 export class AdminDashboardPageComponent {
   username = localStorage.getItem('sgra_username') || 'Administrador';
 
-  metrics: AdminMetric[] = [
-    { label: 'Usuarios activos', value: 128, icon: 'bi-people', accent: 'metric-icon--blue' },
-    { label: 'Roles vigentes', value: 6, icon: 'bi-shield-check', accent: 'metric-icon--purple' },
-    { label: 'Modulos con permiso', value: 14, icon: 'bi-grid-3x3-gap', accent: 'metric-icon--green' },
-    { label: 'Cuentas inactivas', value: 9, icon: 'bi-person-x', accent: 'metric-icon--orange' },
-  ];
+  private adminService = inject(AdminService);
+
+  metrics: AdminMetric[] = [];
+
+  ngOnInit(): void {
+    this.loadDashboardStats();
+  }
+
+  loadDashboardStats(): void {
+    this.adminService.getDashboardStats().subscribe({
+      next: (data: AdministrationDashboard) => {
+        this.metrics = [
+          { label: 'Usuarios activos', value: 128, icon: 'bi-people', accent: 'metric-icon--blue' },
+          { label: 'Roles vigentes', value: data.assetRoles, icon: 'bi-shield-check', accent: 'metric-icon--purple' },
+          { label: 'Modulos con permiso', value: data.modulesWithPermissions, icon: 'bi-grid-3x3-gap', accent: 'metric-icon--green' },
+          { label: 'Cuentas inactivas', value: data.inactiveAccounts, icon: 'bi-person-x', accent: 'metric-icon--orange' },
+        ];
+      },
+      error: (err) => {
+        console.error('Error al obtener las estadísticas del dashboard', err);
+      }
+    });
+  }
 
   auditTrail: AdminAudit[] = [
     {
