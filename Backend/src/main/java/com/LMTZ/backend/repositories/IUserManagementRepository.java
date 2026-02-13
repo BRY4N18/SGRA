@@ -7,5 +7,5 @@ import com.LMTZ.backend.entities.UserManagement;
 
 @Repository
 public interface IUserManagementRepository extends JpaRepository<UserManagement, Integer> {
-    Long countByEstadoFalse(); // Cuentas inactivas
+    Long countByStateFalse(); // Cuentas inactivas
 }

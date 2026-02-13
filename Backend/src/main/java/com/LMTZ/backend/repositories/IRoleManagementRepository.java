@@ -11,7 +11,7 @@ import com.LMTZ.backend.entities.RoleManagement;
 
 @Repository
 public interface IRoleManagementRepository extends JpaRepository<RoleManagement, Integer>{
-    Optional<List<RoleDTO>> findByEstadoTrue(); // Listar roles con sus id
-    Long countByEstadoTrue(); // Roles activos
-    Long countByEstadoFalse(); // Roles inactivos
+    Optional<List<RoleDTO>> findByStateTrue(); // Listar roles con sus id
+    Long countByStateTrue(); // Roles activos
+    Long countByStateFalse(); // Roles inactivos
 }
