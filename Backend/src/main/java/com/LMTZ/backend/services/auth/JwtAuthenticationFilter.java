@@ -28,19 +28,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
+
         String header = request.getHeader("Authorization");
+
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             try {
                 Claims claims = jwtService.parseClaims(token);
+
                 String username = claims.getSubject();
                 String role = claims.get("role", String.class);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        username,
-                        null,
-                        role != null
-                                ? Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role))
-                                : Collections.emptyList());
+
+                //DECLARAR userId UNA SOLA VEZ
+                Integer userId = claims.get("userId", Integer.class);
+
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                username,
+                                null,
+                                role != null
+                                        ? Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role))
+                                        : Collections.emptyList());
+
+                // guardamos el userId aquí (details)
+                authentication.setDetails(userId);
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception ex) {
                 SecurityContextHolder.clearContext();

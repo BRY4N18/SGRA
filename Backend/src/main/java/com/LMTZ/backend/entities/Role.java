@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tbroles")
+@Table(name = "tbroles", schema = "seguridad")
 public class Role {
     @Id
     @Column(name = "idrol", nullable = false)

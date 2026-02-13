@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "tbaccesos")
+@Table(name = "tbaccesos", schema = "seguridad")
 public class Access {
     @Id
     @Column(name = "idaccesso")
