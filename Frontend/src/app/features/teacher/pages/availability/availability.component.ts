@@ -2,14 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeacherMockService } from '../../../../core/services/teacherMock.service';
 import { AvailabilitySlot, AvailabilityStatus } from '../../models/teacherAvailability.model';
-
-interface AvailabilityStats {
-  disponibles: number;
-  programadas: number;
-  horasSemanales: number;
-  diasActivos: number;
-  distribucion: { day: string; hours: number }[];
-}
+import { AvailabilityStats } from '../../models/AvailabilityStats';
 
 @Component({
   selector: 'app-teacher-disponibilidad',

@@ -1,34 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-type PermissionKey = 'view' | 'create' | 'edit' | 'delete';
-
-interface PermissionFlags {
-  view: boolean;
-  create: boolean;
-  edit: boolean;
-  delete: boolean;
-}
-
-interface PermissionAction {
-  key: PermissionKey;
-  label: string;
-  icon: string;
-}
-
-interface AdminModule {
-  key: string;
-  name: string;
-  description: string;
-  category: string;
-  icon: string;
-}
-
-interface RoleOption {
-  key: string;
-  label: string;
-}
+import { PermissionFlags } from '../../modelos/PermissionFlags';
+import { PermissionAction } from '../../modelos/PermissionAction';
+import { AdminModule } from '../../modelos/AdminModule';
+import { GRole } from '../../modelos/GRole';
 
 @Component({
   selector: 'app-admin-permisos',
@@ -38,11 +14,11 @@ interface RoleOption {
   styleUrl: './adminPermissions.component.scss',
 })
 export class AdminPermisosComponent {
-  roleOptions: RoleOption[] = [
-    { key: 'ADMIN', label: 'Administrador' },
-    { key: 'COORDINATOR', label: 'Coordinador' },
-    { key: 'TEACHER', label: 'Docente' },
-    { key: 'STUDENT', label: 'Estudiante' },
+  roleOptions: GRole[] = [
+    { roleId: 1, role: 'Administrador' },
+    { roleId: 2, role: 'Coordinador' },
+    { roleId: 3, role: 'Docente' },
+    { roleId: 4, role: 'Estudiante' },
   ];
 
   permissionActions: PermissionAction[] = [
@@ -118,13 +94,13 @@ export class AdminPermisosComponent {
     },
   ];
 
-  selectedRole = 'ADMIN';
-  permissionMatrix: Record<string, Record<string, PermissionFlags>> = {};
+  selectedRole = 1;
+  permissionMatrix: Record<number | string, Record<string, PermissionFlags>> = {};
 
   constructor() {
     this.permissionMatrix = {
-      ADMIN: this.buildRoleMatrix({ view: true, create: true, edit: true, delete: true }),
-      COORDINATOR: this.buildRoleMatrix(
+      1: this.buildRoleMatrix({ view: true, create: true, edit: true, delete: true }),
+      2: this.buildRoleMatrix(
         { view: true, create: true, edit: true, delete: false },
         {
           roles: { create: false, edit: false, delete: false },
@@ -156,11 +132,11 @@ export class AdminPermisosComponent {
   }
 
   get selectedRoleLabel(): string {
-    return this.roleOptions.find(role => role.key === this.selectedRole)?.label ?? this.selectedRole;
+    return this.roleOptions.find(role => role.roleId === this.selectedRole)?.role ?? String(this.selectedRole);
   }
 
   get enabledModules(): number {
-    const matrix = this.permissionMatrix[this.selectedRole] ?? {};
+    const matrix = this.permissionMatrix[this.selectedRole as keyof typeof this.permissionMatrix] ?? {};
     return this.modules.filter(module => {
       const flags = matrix[module.key];
       return flags ? Object.values(flags).some(Boolean) : false;
@@ -168,7 +144,7 @@ export class AdminPermisosComponent {
   }
 
   get fullAccessModules(): number {
-    const matrix = this.permissionMatrix[this.selectedRole] ?? {};
+    const matrix = this.permissionMatrix[this.selectedRole as keyof typeof this.permissionMatrix] ?? {};
     return this.modules.filter(module => {
       const flags = matrix[module.key];
       return flags ? Object.values(flags).every(Boolean) : false;
@@ -176,7 +152,7 @@ export class AdminPermisosComponent {
   }
 
   get readOnlyModules(): number {
-    const matrix = this.permissionMatrix[this.selectedRole] ?? {};
+    const matrix = this.permissionMatrix[this.selectedRole as keyof typeof this.permissionMatrix] ?? {};
     return this.modules.filter(module => {
       const flags = matrix[module.key];
       return flags ? flags.view && !flags.create && !flags.edit && !flags.delete : false;

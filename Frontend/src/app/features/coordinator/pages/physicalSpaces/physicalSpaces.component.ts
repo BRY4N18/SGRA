@@ -1,21 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface SpaceResource {
-  name: string;
-}
-
-interface SpaceCard {
-  id: number;
-  type: string;
-  name: string;
-  building: string;
-  capacity: number;
-  resources: SpaceResource[];
-  occupancy: number;
-  status: 'Disponible' | 'En uso';
-}
+import { SpaceResource } from '../../modelos/SpaceResource';
+import { SpaceCard } from '../../modelos/SpaceCard';
 
 @Component({
   selector: 'app-espacios-fisicos',

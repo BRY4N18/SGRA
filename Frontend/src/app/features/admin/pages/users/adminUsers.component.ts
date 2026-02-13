@@ -1,27 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface AdminUser {
-  id: number;
-  fullName: string;
-  identifier: string;
-  email: string;
-  phone: string;
-  address: string;
-  gender: string;
-  institution: string;
-  role: string;
-  username: string;
-  status: 'Activo' | 'Inactivo';
-  accountStatus: 'Activa' | 'Bloqueada';
-}
-
-interface AdminKpi {
-  label: string;
-  value: number;
-  icon: string;
-}
+import { AdminUser } from '../../modelos/AdminUser';
+import { AdminKpi } from '../../modelos/AdminKpi';
 
 @Component({
   selector: 'app-admin-usuarios',

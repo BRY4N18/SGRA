@@ -1,22 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface AdminRole {
-  id: number;
-  name: string;
-  description: string;
-  users: number;
-  status: 'Activo' | 'Inactivo';
-  modules: number;
-  updated: string;
-}
-
-interface RoleKpi {
-  label: string;
-  value: number;
-  icon: string;
-}
+import { AdminRole } from '../../modelos/AdminRole';
+import { RoleKpi } from '../../modelos/RoleKpi';
 
 @Component({
   selector: 'app-admin-roles',

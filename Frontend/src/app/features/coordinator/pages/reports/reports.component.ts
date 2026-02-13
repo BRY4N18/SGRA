@@ -1,22 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface ReportCard {
-  title: string;
-  description: string;
-  icon: string;
-  accent: string;
-  filters: string[];
-  options?: string[];
-  checkboxLabel?: string;
-}
-
-interface RecentReport {
-  type: string;
-  date: string;
-  format: string;
-}
+import { ReportCard } from '../../modelos/ReportCard';
+import { RecentReport } from '../../modelos/RecentReport';
 
 @Component({
   selector: 'app-reportes-coordinacion',
