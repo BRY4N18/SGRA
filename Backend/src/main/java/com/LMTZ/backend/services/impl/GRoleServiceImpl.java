@@ -21,7 +21,7 @@ public class GRoleServiceImpl implements IGRoleService{
     //private final IModuleManagementRepository moduleManagementRepo;
 
     public AdministrationDashboardDTO getAdministrationDashboardDTO(){
-        AdministrationDashboardDTO adminDashDto = null;
+        AdministrationDashboardDTO adminDashDto = new AdministrationDashboardDTO();
         adminDashDto.setAssetRoles(roleManagementRepo.countByStateTrue());
         adminDashDto.setInactiveAccounts(userManagementRepo.countByStateFalse());
         //adminDashDto.setModulesWithPermissions(moduleManagementRepo);
