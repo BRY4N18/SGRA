@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "tbusuarios")
+@Table(name = "tbusuarios", schema = "general")
 public class User {
     @Id
     @Column(name = "idusuario")
