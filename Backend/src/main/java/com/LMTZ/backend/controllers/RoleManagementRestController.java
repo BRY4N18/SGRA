@@ -39,11 +39,7 @@ public class RoleManagementRestController {
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
-    // ---------------------------------------------------------
-    // NUEVOS ENDPOINTS (STORED PROCEDURES)
-    // ---------------------------------------------------------
-
-    @GetMapping("/{nombreRol}/permissions")
+    @GetMapping("/admin/permissions/{nombreRol}")
     public ResponseEntity<List<PermisoEsquemaDTO>> getRolePermissions(@PathVariable String nombreRol) {
         List<PermisoEsquemaDTO> permisos = igroleser.listarPermisosDeRol(nombreRol);
         if (permisos.isEmpty()) {
@@ -54,7 +50,6 @@ public class RoleManagementRestController {
 
     @PostMapping("/create")
     public ResponseEntity<RoleResponseDTO> createRole(@RequestBody RoleCreateDTO request) {
-        // Ahora el request body solo trae { "nombreRol": "...", "descripcion": "..." }
         RoleResponseDTO response = igroleser.crearNuevoRol(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleResponseDTO {
-    private String mensaje;
-    private Boolean exito;
+public class PermisoEsquemaDTO {
+    private String nombreEsquema;
+    private String nombreRol;
+    private String permisos;
 }

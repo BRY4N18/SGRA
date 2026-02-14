@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map; // Necesario para recibir los OUT parameters del SP
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Importante para el cursor
 
@@ -17,6 +18,9 @@ import com.LMTZ.backend.repositories.IRoleManagementRepository;
 import com.LMTZ.backend.repositories.IUserManagementRepository;
 import com.LMTZ.backend.services.IGRoleService;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureQuery;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class GRoleServiceImpl implements IGRoleService{
     private final IRoleManagementRepository roleManagementRepo;
     private final IUserManagementRepository userManagementRepo;
+    private final EntityManager entityManager;
     //private final IModuleManagementRepository moduleManagementRepo;
 
     @Override
@@ -43,12 +48,18 @@ public class GRoleServiceImpl implements IGRoleService{
         .collect(Collectors.toList());
     }
 
-    // --- MÉTODOS NUEVOS (SP) ---
-
     @Override
     @Transactional(readOnly = true)
     public List<PermisoEsquemaDTO> listarPermisosDeRol(String nombreRol) {
-        List<Object[]> resultadosCrudos = roleManagementRepo.llamarSpPermisos(nombreRol);
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("seguridad.sp_sl_permisosesquemas_rol");
+        query.registerStoredProcedureParameter("p_nombre_rol", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("p_cursor", void.class, ParameterMode.REF_CURSOR);
+        query.setParameter("p_nombre_rol", nombreRol);
+        query.execute();
+
+        @SuppressWarnings("unchecked")
+        List<Object[]> resultadosCrudos = query.getResultList();
+
         return resultadosCrudos.stream().map(fila -> new PermisoEsquemaDTO(
                 (String) fila[0],
                 (String) fila[1],
@@ -57,11 +68,8 @@ public class GRoleServiceImpl implements IGRoleService{
     }
 
     @Override
-    // SIN @Transactional (El SP maneja su propio COMMIT/ROLLBACK)
     public RoleResponseDTO crearNuevoRol(RoleCreateDTO request) {
 
-        // ACTUALIZADO: Solo enviamos nombre y descripción.
-        // La DB se encarga del nombre interno 'role_xxx'.
         Map<String, Object> resultado = roleManagementRepo.crearRol(
                 request.getNombreRol(),
                 request.getDescripcion()
