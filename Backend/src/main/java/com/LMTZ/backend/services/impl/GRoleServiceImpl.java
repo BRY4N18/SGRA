@@ -3,13 +3,12 @@ import java.util.List;
 import java.util.Map; // Necesario para recibir los OUT parameters del SP
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional; // Importante para el cursor
 
 import com.LMTZ.backend.dtos.AdministrationDashboardDTO;
 import com.LMTZ.backend.dtos.RoleDTO;
-// Importamos tus nuevos DTOs
+
 import com.LMTZ.backend.dtos.PermisoEsquemaDTO;
 import com.LMTZ.backend.dtos.RoleCreateDTO;
 import com.LMTZ.backend.dtos.RoleResponseDTO;
